@@ -7,7 +7,6 @@ import { connectToDatabase } from "@/lib/db";
 import { resolveServiceImage } from "@/lib/service-image";
 import Service from "@/models/Service";
 import { CTASection } from "@/components/common/cta-section";
-import { PageBanner } from "@/components/common/page-banner";
 import { SectionTitle } from "@/components/common/section-title";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -174,7 +173,6 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   return (
     <>
-      <PageBanner title={service.title} description={service.shortDescription} />
       <section className="section-padding">
         <div className="container grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-10">
           <div>
