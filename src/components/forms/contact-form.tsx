@@ -80,7 +80,7 @@ export function ContactForm() {
         {errors.message ? <p className="mt-1 text-xs text-red-600">{errors.message.message}</p> : null}
       </div>
       <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
-        {isSubmitting ? "Submitting..." : "Submit Enquiry"}
+        {isSubmitting ? "Submitting..." : "Submit Request"}
       </Button>
     </form>
   );

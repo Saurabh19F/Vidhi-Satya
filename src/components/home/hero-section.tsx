@@ -57,11 +57,11 @@ export function HeroSection({ slides }: HeroSectionProps) {
             className="relative z-10 space-y-5 sm:space-y-7"
           >
             {sanitizedSubtitle ? (
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-tertiary sm:text-base sm:tracking-[0.22em]">
+              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-tertiary sm:text-base sm:tracking-[0.2em] md:text-lg md:tracking-[0.22em]">
                 {sanitizedSubtitle}
               </p>
             ) : null}
-            <h1 className="max-w-[18ch] font-[family-name:var(--font-newsreader)] text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="max-w-[20ch] font-[family-name:var(--font-newsreader)] text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
               <span className="text-foreground">{current.title}</span>
             </h1>
             <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">{current.description}</p>

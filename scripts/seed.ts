@@ -8,7 +8,6 @@ import About from "../src/models/About";
 import Service from "../src/models/Service";
 import Blog from "../src/models/Blog";
 import FAQ from "../src/models/FAQ";
-import Testimonial from "../src/models/Testimonial";
 import ContactInfo from "../src/models/ContactInfo";
 import SiteSetting from "../src/models/SiteSetting";
 import SEO from "../src/models/SEO";
@@ -226,50 +225,6 @@ async function seed() {
         "Payments are taken in advance to company bank accounts only, with no credit. Communication and change decisions are expected through designated SPOC channels and formal email workflow.",
       category: "Services",
       order: 6,
-      isPublished: true
-    }
-  ]);
-
-  await Testimonial.deleteMany({});
-  await Testimonial.insertMany([
-    {
-      name: "Rohan Kulkarni",
-      designation: "Managing Director",
-      company: "Altura Infra Pvt Ltd",
-      message:
-        "Vidhi Satya helped us align strategy with governance in a way that immediately improved decision quality at leadership level.",
-      rating: 5,
-      imageUrl: "https://placehold.co/300x300/0F172A/F8FAFC?text=Rohan",
-      isPublished: true
-    },
-    {
-      name: "Neha Sinha",
-      designation: "Founder",
-      company: "NS Ventures",
-      message:
-        "The advisory process was rigorous but practical. We moved from uncertainty to a confident execution plan within weeks.",
-      rating: 5,
-      imageUrl: "https://placehold.co/300x300/1D4ED8/F8FAFC?text=Neha",
-      isPublished: true
-    },
-    {
-      name: "Arvind Menon",
-      designation: "Policy Program Lead",
-      company: "Public Development Authority",
-      message:
-        "Their policy-aware execution model significantly improved cross-department coordination and delivery confidence.",
-      rating: 4,
-      imageUrl: "https://placehold.co/300x300/14B8A6/0F172A?text=Arvind",
-      isPublished: true
-    },
-    {
-      name: "Sneha Agarwal",
-      designation: "CHRO",
-      company: "Westline Group",
-      message:
-        "Vidhi Satya’s frameworks brought structure to our strategic decisions and reduced avoidable governance friction.",
-      rating: 5,
-      imageUrl: "https://placehold.co/300x300/F59E0B/0F172A?text=Sneha",
       isPublished: true
     }
   ]);

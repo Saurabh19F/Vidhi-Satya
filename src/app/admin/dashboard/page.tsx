@@ -12,7 +12,6 @@ type DashboardState = {
   enquiries: number;
   services: number;
   blogs: number;
-  testimonials: number;
   recentEnquiries: Array<{
     _id: string;
     name: string;
@@ -27,23 +26,20 @@ export default function AdminDashboardPage() {
     enquiries: 0,
     services: 0,
     blogs: 0,
-    testimonials: 0,
     recentEnquiries: []
   });
 
   useEffect(() => {
     async function fetchAll() {
-      const [enquiriesRes, servicesRes, blogsRes, testimonialsRes] = await Promise.all([
+      const [enquiriesRes, servicesRes, blogsRes] = await Promise.all([
         fetch("/api/enquiries"),
         fetch("/api/services?all=true"),
-        fetch("/api/blogs?all=true"),
-        fetch("/api/testimonials?all=true")
+        fetch("/api/blogs?all=true")
       ]);
-      const [enquiriesJson, servicesJson, blogsJson, testimonialsJson] = await Promise.all([
+      const [enquiriesJson, servicesJson, blogsJson] = await Promise.all([
         enquiriesRes.json(),
         servicesRes.json(),
-        blogsRes.json(),
-        testimonialsRes.json()
+        blogsRes.json()
       ]);
 
       const enquiries = enquiriesJson.data || [];
@@ -51,7 +47,6 @@ export default function AdminDashboardPage() {
         enquiries: enquiries.length,
         services: (servicesJson.data || []).length,
         blogs: (blogsJson.data || []).length,
-        testimonials: (testimonialsJson.data || []).length,
         recentEnquiries: enquiries.slice(0, 5)
       });
     }
@@ -62,11 +57,10 @@ export default function AdminDashboardPage() {
     <div>
       <AdminHeader title="Dashboard" />
       <div className="space-y-8 p-4 md:p-8">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           <DashboardCard label="Total Enquiries" value={data.enquiries} />
           <DashboardCard label="Total Services" value={data.services} />
           <DashboardCard label="Total Blog Posts" value={data.blogs} />
-          <DashboardCard label="Total Testimonials" value={data.testimonials} />
         </div>
         <div>
           <h2 className="mb-4 text-xl font-semibold">Recent Enquiries</h2>

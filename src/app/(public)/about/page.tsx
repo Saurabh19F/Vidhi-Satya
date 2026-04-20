@@ -40,35 +40,15 @@ export default async function AboutPage() {
           </Card>
         </div>
       </section>
-      <section className="section-padding bg-surface-low">
+
+      <section className="pb-12 md:pb-16">
         <div className="container">
-          <Card className="mx-auto max-w-6xl">
-            <CardContent className="space-y-8 p-6 sm:p-8">
-              <div className="grid gap-8 md:grid-cols-3">
-                <div>
-                  <h3 className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Vision</h3>
-                  <p className="mt-2 text-muted-foreground">{about?.vision}</p>
-                </div>
-                <div>
-                  <h3 className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Mission</h3>
-                  <p className="mt-2 text-muted-foreground">{about?.mission}</p>
-                </div>
-                <div>
-                  <h3 className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Philosophy</h3>
-                  <p className="mt-2 text-muted-foreground">{about?.philosophy}</p>
-                </div>
-              </div>
-              <div className="border-t border-border pt-6">
-                <p className="text-sm leading-7 text-muted-foreground sm:text-base">
-                  <span className="font-semibold text-foreground">Motto:</span> Helping clients complete work in a duly compliant manner
-                  while remaining truthful in all aspects.
-                </p>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
-                  Outcome-focused delivery for individuals, corporates, and government entities.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="max-w-4xl space-y-4 text-sm leading-7 text-muted-foreground sm:text-base">
+            <h2 className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              Vision, Mission, Philosophy.
+            </h2>
+            <p>Helping clients complete work in a duly compliant manner while remaining truthful in all aspects.</p>
+          </div>
         </div>
       </section>
 

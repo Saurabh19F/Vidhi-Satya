@@ -8,10 +8,21 @@ type WebsiteIntroGateProps = {
 };
 
 const INTRO_FALLBACK_DURATION_MS = 15000;
+const INTRO_SEEN_SESSION_KEY = "vidhi_satya_intro_seen";
 
 export function WebsiteIntroGate({ children }: WebsiteIntroGateProps) {
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
   const introVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  const closeIntro = () => {
+    window.sessionStorage.setItem(INTRO_SEEN_SESSION_KEY, "1");
+    setShowIntro(false);
+  };
+
+  useEffect(() => {
+    const alreadySeen = window.sessionStorage.getItem(INTRO_SEEN_SESSION_KEY) === "1";
+    setShowIntro(!alreadySeen);
+  }, []);
 
   useEffect(() => {
     if (!showIntro) {
@@ -22,7 +33,7 @@ export function WebsiteIntroGate({ children }: WebsiteIntroGateProps) {
     document.body.style.overflow = "hidden";
 
     const timer = window.setTimeout(() => {
-      setShowIntro(false);
+      closeIntro();
     }, INTRO_FALLBACK_DURATION_MS);
 
     return () => {
@@ -57,8 +68,8 @@ export function WebsiteIntroGate({ children }: WebsiteIntroGateProps) {
                 introVideoRef.current.defaultPlaybackRate = 3;
                 introVideoRef.current.playbackRate = 3;
               }}
-              onEnded={() => setShowIntro(false)}
-              onError={() => setShowIntro(false)}
+              onEnded={closeIntro}
+              onError={closeIntro}
             >
               <source src="/videos/welcome-to-vidhi-mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
               <source src="/videos/welcome-to-vidhi.mp4" type="video/mp4" />

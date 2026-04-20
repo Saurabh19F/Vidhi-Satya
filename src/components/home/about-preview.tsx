@@ -9,10 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 type AboutPreviewProps = {
   about: {
     heading: string;
-    subheading: string;
     description: string;
-    vision: string;
-    mission: string;
     imageUrl: string;
   } | null;
 };
@@ -25,14 +22,6 @@ export function AboutPreview({ about }: AboutPreviewProps) {
       <div className="container grid gap-8 md:grid-cols-2 md:items-center md:gap-10">
         <MotionReveal>
           <SectionTitle eyebrow="About" title={about.heading} description={about.description} />
-          <div className="mt-6 space-y-4 text-sm leading-7 text-muted-foreground sm:text-base">
-            <p>
-              <span className="font-semibold text-foreground">Vision:</span> {about.vision}
-            </p>
-            <p>
-              <span className="font-semibold text-foreground">Mission:</span> {about.mission}
-            </p>
-          </div>
           <Button asChild className="mt-6">
             <Link href="/about">Explore About Us</Link>
           </Button>

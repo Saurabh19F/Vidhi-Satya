@@ -58,11 +58,11 @@ export default async function BookConsultationPage() {
                 <div className="mt-4 rounded-[0.75rem] bg-surface p-4 ring-1 ring-outline-variant/15">
                   <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">Declaration</p>
                   <ul className="mt-2 list-decimal space-y-2 pl-5 text-sm text-foreground/90">
-                    <li>I am competnent and voluntarily cosulataion from vidhisatya.com.</li>
-                    <li>I am reponsaable for giving updated &amp; complete information to VidhiSatya.com.</li>
-                    <li>I agree that information given by me shall remain with vidhisatya.com for use and record.</li>
-                    <li>I/my orgainzation agree to pay all fee and expenses of vidhisatya.com &amp; there recommeded partner and assigns.</li>
-                    <li>I undertake to keep vidhisatya.com indemnified from any loss that may occur from any non-adherance to their advise.</li>
+                    <li>I am competent and am voluntarily seeking consultation from vidhisatya.com.</li>
+                    <li>I am responsible for providing updated and complete information to VidhiSatya.com.</li>
+                    <li>I agree that the information provided by me shall remain with vidhisatya.com for use and record.</li>
+                    <li>I/my organization agree to pay all fees and expenses of vidhisatya.com and their recommended partners and assignees.</li>
+                    <li>I undertake to keep vidhisatya.com indemnified against any loss that may occur due to any non-adherence to their advice.</li>
                   </ul>
                 </div>
                 <p className="mt-3 text-sm text-muted-foreground">Purpose: Use submitted information for advisory workflow and case setup.</p>

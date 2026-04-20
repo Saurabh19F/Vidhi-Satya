@@ -1,9 +1,10 @@
 import { buildPageMetadata } from "@/lib/seo";
-import { getPublicContactData } from "@/lib/public-cache";
-import { ContactForm } from "@/components/forms/contact-form";
+import { getPublicContactData, getPublicServicesData } from "@/lib/public-cache";
+import { ConsultationForm } from "@/components/forms/consultation-form";
 import { SectionTitle } from "@/components/common/section-title";
 import { Card, CardContent } from "@/components/ui/card";
 import { sanitizeCompanyName } from "@/lib/brand-text";
+import type { ServiceItem } from "@/types";
 
 export async function generateMetadata() {
   return buildPageMetadata("contact");
@@ -11,6 +12,8 @@ export async function generateMetadata() {
 
 export default async function ContactPage() {
   const info = await getPublicContactData();
+  const services = (await getPublicServicesData()) as ServiceItem[];
+  const serviceOptions = services.map((service) => service.title);
   const companyName = sanitizeCompanyName(info?.companyName);
   const fallbackAddress = "B 28, Ashoka Niketan, Near Yamuna Sports Complex, Delhi-110092, India";
   const mapSource =
@@ -30,13 +33,13 @@ export default async function ContactPage() {
           </div>
           <Card>
               <CardContent className="p-5 sm:p-6">
-                <h2 className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold sm:text-4xl">Send an Enquiry</h2>
+                <h2 className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold sm:text-4xl">Consultation Request Form</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Work timing: 9:30 AM to 6:00 PM IST. Communications received after work hours are recorded and attended on the next business
                   day.
                 </p>
                 <div className="mt-6">
-                  <ContactForm />
+                  <ConsultationForm serviceOptions={serviceOptions.length ? serviceOptions : ["General Advisory"]} />
                 </div>
               </CardContent>
             </Card>

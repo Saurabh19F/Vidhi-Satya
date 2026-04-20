@@ -56,16 +56,6 @@ export const blogSchema = z.object({
   seoDescription: z.string().min(10)
 });
 
-export const testimonialSchema = z.object({
-  name: z.string().min(2),
-  designation: z.string().min(2),
-  company: z.string().min(2),
-  message: z.string().min(20),
-  rating: z.coerce.number().min(1).max(5),
-  imageUrl: z.string().optional().default(""),
-  isPublished: z.boolean().default(true)
-});
-
 export const faqSchema = z.object({
   question: z.string().min(5),
   answer: z.string().min(10),

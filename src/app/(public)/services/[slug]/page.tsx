@@ -10,7 +10,6 @@ import Service from "@/models/Service";
 import { CTASection } from "@/components/common/cta-section";
 import { SectionTitle } from "@/components/common/section-title";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { ServiceItem } from "@/types";
 
@@ -213,9 +212,6 @@ export default async function ServiceDetailPage({ params }: Props) {
               </CardContent>
             </Card>
             <Badge>{service.category}</Badge>
-            <Button asChild className="india-tricolor-button w-full">
-              <Link href="/book-consultation">Book Consultation</Link>
-            </Button>
           </div>
         </div>
       </section>
