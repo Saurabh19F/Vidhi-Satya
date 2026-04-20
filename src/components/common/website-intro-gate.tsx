@@ -7,21 +7,36 @@ type WebsiteIntroGateProps = {
   children: React.ReactNode;
 };
 
-const INTRO_FALLBACK_DURATION_MS = 15000;
-const INTRO_SEEN_SESSION_KEY = "vidhi_satya_intro_seen";
+const INTRO_FALLBACK_DURATION_MS = 6000;
+const DESKTOP_VIDEO_SRC = "/videos/welcome-to-vidhi.mp4";
+const MOBILE_VIDEO_SRC = "/videos/welcome-to-vidhi-mobile.mp4";
 
 export function WebsiteIntroGate({ children }: WebsiteIntroGateProps) {
   const [showIntro, setShowIntro] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(DESKTOP_VIDEO_SRC);
   const introVideoRef = useRef<HTMLVideoElement | null>(null);
 
   const closeIntro = () => {
-    window.sessionStorage.setItem(INTRO_SEEN_SESSION_KEY, "1");
     setShowIntro(false);
   };
 
   useEffect(() => {
-    const alreadySeen = window.sessionStorage.getItem(INTRO_SEEN_SESSION_KEY) === "1";
-    setShowIntro(!alreadySeen);
+    if (window.location.pathname !== "/") {
+      setShowIntro(false);
+      return;
+    }
+
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    setVideoSrc(isMobile ? MOBILE_VIDEO_SRC : DESKTOP_VIDEO_SRC);
+
+    const navigationEntries = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+    const navigationType = navigationEntries[0]?.type;
+    const legacyType = (performance as Performance & { navigation?: { type?: number } }).navigation?.type;
+    const isDocumentLoad =
+      navigationType === "reload" ||
+      navigationType === "navigate" ||
+      (!navigationType && (legacyType === undefined || legacyType === 0 || legacyType === 1));
+    setShowIntro(isDocumentLoad);
   }, []);
 
   useEffect(() => {
@@ -60,20 +75,20 @@ export function WebsiteIntroGate({ children }: WebsiteIntroGateProps) {
               autoPlay
               muted
               playsInline
-              preload="auto"
-              onLoadedMetadata={() => {
-                if (!introVideoRef.current) {
-                  return;
-                }
-                introVideoRef.current.defaultPlaybackRate = 3;
-                introVideoRef.current.playbackRate = 3;
-              }}
+              preload="metadata"
+              poster="/brand/vidhi-satya-logo-tight.png"
               onEnded={closeIntro}
               onError={closeIntro}
             >
-              <source src="/videos/welcome-to-vidhi-mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
-              <source src="/videos/welcome-to-vidhi.mp4" type="video/mp4" />
+              <source src={videoSrc} type="video/mp4" />
             </video>
+            <button
+              type="button"
+              onClick={closeIntro}
+              className="absolute right-4 top-4 rounded-[0.6rem] bg-black/60 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white ring-1 ring-white/20 transition hover:bg-black/80"
+            >
+              Skip Intro
+            </button>
           </motion.div>
         ) : null}
       </AnimatePresence>
