@@ -13,8 +13,31 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+function requiresDepartmentAndDesignation(serviceInterested?: string) {
+  const value = (serviceInterested || "").toLowerCase();
+  return value.includes("corporate") || value.includes("government") || value.includes("gov");
+}
+
 const consultationSchema = enquirySchema.extend({
   preferredDate: z.string().optional()
+}).superRefine((values, ctx) => {
+  if (!requiresDepartmentAndDesignation(values.serviceInterested)) return;
+
+  if (!values.department?.trim()) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Department is required for corporate/government consultations.",
+      path: ["department"]
+    });
+  }
+
+  if (!values.designation?.trim()) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Designation is required for corporate/government consultations.",
+      path: ["designation"]
+    });
+  }
 });
 
 type ConsultationValues = z.infer<typeof consultationSchema>;
@@ -28,15 +51,20 @@ export function ConsultationForm({ serviceOptions }: ConsultationFormProps) {
   const {
     register,
     handleSubmit,
+    watch,
     setValue,
     reset,
     formState: { errors }
   } = useForm<ConsultationValues>({
     resolver: zodResolver(consultationSchema),
     defaultValues: {
-      serviceInterested: serviceOptions[0] || "General Advisory"
+      serviceInterested: serviceOptions[0] || "General Advisory",
+      department: "",
+      designation: ""
     }
   });
+  const selectedService = watch("serviceInterested");
+  const showDepartmentAndDesignation = requiresDepartmentAndDesignation(selectedService);
 
   const onSubmit = async (values: ConsultationValues) => {
     setIsSubmitting(true);
@@ -87,7 +115,16 @@ export function ConsultationForm({ serviceOptions }: ConsultationFormProps) {
       </div>
       <div>
         <Label>Service</Label>
-        <Select onValueChange={(value) => setValue("serviceInterested", value)} defaultValue={serviceOptions[0]}>
+        <Select
+          value={selectedService}
+          onValueChange={(value) => {
+            setValue("serviceInterested", value, { shouldValidate: true, shouldDirty: true });
+            if (!requiresDepartmentAndDesignation(value)) {
+              setValue("department", "", { shouldValidate: true });
+              setValue("designation", "", { shouldValidate: true });
+            }
+          }}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select a service" />
           </SelectTrigger>
@@ -100,6 +137,20 @@ export function ConsultationForm({ serviceOptions }: ConsultationFormProps) {
           </SelectContent>
         </Select>
       </div>
+      {showDepartmentAndDesignation ? (
+        <div className="grid gap-4 md:grid-cols-2">
+          <div>
+            <Label>Department</Label>
+            <Input {...register("department")} placeholder="Enter department" />
+            {errors.department ? <p className="mt-1 text-xs text-red-600">{errors.department.message}</p> : null}
+          </div>
+          <div>
+            <Label>Designation</Label>
+            <Input {...register("designation")} placeholder="Enter designation" />
+            {errors.designation ? <p className="mt-1 text-xs text-red-600">{errors.designation.message}</p> : null}
+          </div>
+        </div>
+      ) : null}
       <div>
         <Label>Subject</Label>
         <Input {...register("subject")} placeholder="Consultation request" />

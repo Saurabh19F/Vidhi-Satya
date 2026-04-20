@@ -146,6 +146,26 @@ export function BlogPreview({ blogs }: BlogPreviewProps) {
             </MotionReveal>
           ))}
         </div>
+        <Card className="mt-8 max-w-xl">
+          <CardContent className="p-5">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">Team Member</p>
+            <div className="mt-3 relative h-20 w-20 overflow-hidden rounded-full ring-1 ring-outline-variant/20">
+              <Image src="/uploads/rajesh-narang.jpg" alt="Rajesh Narang" fill className="object-cover" />
+            </div>
+            <p className="mt-2 font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Rajesh Narang</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Founder and mentor with 35+ years of advisory experience across individual, corporate, and government matters.
+            </p>
+            <a
+              href="https://www.linkedin.com/company/east-delhi-law-office/"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-block text-sm font-semibold text-accent hover:underline"
+            >
+              View LinkedIn Profile
+            </a>
+          </CardContent>
+        </Card>
         <div className="mt-8">
           <Button asChild variant="default">
             <Link href="/blog">View All Insights</Link>

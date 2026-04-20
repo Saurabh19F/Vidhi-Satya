@@ -24,9 +24,6 @@ export default async function PublicLayout({ children }: { children: ReactNode }
           address={contact?.address}
           phone={contact?.phone}
           email={contact?.email}
-          linkedin={contact?.linkedin}
-          instagram={contact?.instagram}
-          facebook={contact?.facebook}
         />
         <StickyCta text={settings?.ctaText || "Book Consultation"} />
         <WhatsappFloat phone={contact?.whatsapp || contact?.phone} />

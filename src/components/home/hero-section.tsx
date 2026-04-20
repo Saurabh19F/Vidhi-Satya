@@ -33,6 +33,11 @@ export function HeroSection({ slides }: HeroSectionProps) {
   }, [slides.length]);
 
   const current = slides[index];
+  const sanitizedSubtitle = current?.subtitle
+    ?.replace(/\s*[•|·-]?\s*UPI\s*\/\s*VIDHISATYA\.COM\s*/i, " ")
+    ?.replace(/\s*[•|·-]\s*$/, "")
+    ?.replace(/\s{2,}/g, " ")
+    ?.trim();
 
   if (!current) {
     return null;
@@ -51,10 +56,12 @@ export function HeroSection({ slides }: HeroSectionProps) {
             transition={{ duration: 0.45 }}
             className="relative z-10 space-y-5 sm:space-y-7"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-tertiary sm:text-xs sm:tracking-[0.28em]">
-              {current.subtitle}
-            </p>
-            <h1 className="font-[family-name:var(--font-newsreader)] text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            {sanitizedSubtitle ? (
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-tertiary sm:text-base sm:tracking-[0.22em]">
+                {sanitizedSubtitle}
+              </p>
+            ) : null}
+            <h1 className="max-w-[18ch] font-[family-name:var(--font-newsreader)] text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
               <span className="text-foreground">{current.title}</span>
             </h1>
             <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">{current.description}</p>

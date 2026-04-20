@@ -87,18 +87,8 @@ export default function AdminContactInfoPage() {
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <Label>Facebook</Label>
-                  <Input {...register("facebook")} />
-                </div>
-                <div>
-                  <Label>Instagram</Label>
-                  <Input {...register("instagram")} />
-                </div>
-              </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                <div>
                   <Label>LinkedIn</Label>
-                  <Input {...register("linkedin")} />
+                  <Input {...register("linkedin")} placeholder="https://www.linkedin.com/company/east-delhi-law-office/" />
                 </div>
                 <div>
                   <Label>Twitter</Label>

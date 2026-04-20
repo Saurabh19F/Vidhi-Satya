@@ -7,10 +7,20 @@ import ContactInfo from "@/models/ContactInfo";
 import FAQ from "@/models/FAQ";
 import Service from "@/models/Service";
 import SiteSetting from "@/models/SiteSetting";
+import { sortServicesByPriority } from "@/lib/service-order";
 import type { AboutItem, BlogItem, ContactInfoItem, ServiceItem, SiteSettingItem } from "@/types";
 
 function serialize<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T;
+}
+
+type ServiceLinkCandidate = {
+  title?: string;
+  slug?: string;
+};
+
+function isServiceLinkCandidateValid(service: ServiceLinkCandidate): service is { title: string; slug: string } {
+  return typeof service.title === "string" && service.title.length > 0 && typeof service.slug === "string" && service.slug.length > 0;
 }
 
 const REVALIDATE_SECONDS = 30;
@@ -21,7 +31,7 @@ const getCachedPublicLayoutData = unstable_cache(
     const [contact, settings, navServices] = await Promise.all([
       ContactInfo.findOne().lean(),
       SiteSetting.findOne().lean(),
-      Service.find({ isPublished: true }).sort({ isFeatured: -1, createdAt: -1 }).select("title slug").limit(3).lean()
+      Service.find({ isPublished: true }).select("title slug").lean<ServiceLinkCandidate[]>()
     ]);
     const contactInfo = contact as unknown as ContactInfoItem | null;
     const siteSettings = settings as unknown as SiteSettingItem | null;
@@ -33,7 +43,10 @@ const getCachedPublicLayoutData = unstable_cache(
     }>({
       contact: contactInfo,
       settings: siteSettings,
-      serviceLinks: navServices.map((service) => ({ title: service.title, slug: service.slug }))
+      serviceLinks: sortServicesByPriority(navServices)
+        .filter(isServiceLinkCandidateValid)
+        .slice(0, 3)
+        .map((service) => ({ title: service.title, slug: service.slug }))
     });
   },
   ["public-layout-data"],
@@ -61,8 +74,8 @@ export async function getPublicAboutData() {
 const getCachedServicesData = unstable_cache(
   async () => {
     await connectToDatabase();
-    const services = (await Service.find({ isPublished: true }).sort({ category: 1, createdAt: -1 }).lean()) as unknown as ServiceItem[];
-    return serialize<ServiceItem[]>(services);
+    const services = (await Service.find({ isPublished: true }).lean()) as unknown as ServiceItem[];
+    return serialize<ServiceItem[]>(sortServicesByPriority(services));
   },
   ["public-services-data"],
   { revalidate: REVALIDATE_SECONDS, tags: ["public-services"] }

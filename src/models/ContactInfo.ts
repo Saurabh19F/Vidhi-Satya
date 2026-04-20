@@ -8,9 +8,7 @@ const contactInfoSchema = new Schema(
     email: { type: String, required: true },
     whatsapp: { type: String, default: "" },
     googleMapLink: { type: String, default: "" },
-    facebook: { type: String, default: "" },
-    instagram: { type: String, default: "" },
-    linkedin: { type: String, default: "" },
+    linkedin: { type: String, default: "https://www.linkedin.com/company/east-delhi-law-office/" },
     twitter: { type: String, default: "" }
   },
   { timestamps: true }

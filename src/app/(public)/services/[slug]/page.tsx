@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { buildPageMetadata } from "@/lib/seo";
 import { connectToDatabase } from "@/lib/db";
+import { sortServicesByPriority } from "@/lib/service-order";
 import { resolveServiceImage } from "@/lib/service-image";
 import Service from "@/models/Service";
 import { CTASection } from "@/components/common/cta-section";
@@ -169,7 +170,9 @@ export default async function ServiceDetailPage({ params }: Props) {
   const serviceCategory = resolveServiceCategory(service.category, service.title);
   const playbook = SERVICE_PLAYBOOK[serviceCategory];
 
-  const relatedServices = (await Service.find({ _id: { $ne: service._id }, isPublished: true }).limit(3).lean()) as unknown as ServiceItem[];
+  const relatedServices = sortServicesByPriority(
+    (await Service.find({ _id: { $ne: service._id }, isPublished: true }).lean()) as unknown as ServiceItem[]
+  ).slice(0, 3);
 
   return (
     <>

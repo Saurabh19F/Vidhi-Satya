@@ -1,34 +1,34 @@
 import Link from "next/link";
 
+import { VisitorCounter } from "@/components/common/visitor-counter";
+import { sanitizeCompanyName } from "@/lib/brand-text";
+
 type FooterProps = {
   companyName?: string;
   footerText?: string;
   address?: string;
   phone?: string;
   email?: string;
-  linkedin?: string;
-  instagram?: string;
-  facebook?: string;
 };
+
+const LINKEDIN_URL = "https://www.linkedin.com/company/east-delhi-law-office/";
 
 export function Footer({
   companyName = "Vidhi Satya Advisory LLP",
   footerText = "Trusted advisory with practical execution.",
   address,
   phone,
-  email,
-  linkedin,
-  instagram,
-  facebook
+  email
 }: FooterProps) {
   const year = new Date().getFullYear();
+  const displayCompanyName = sanitizeCompanyName(companyName);
 
   return (
     <footer className="mt-16 bg-[#253D2C] text-[#CFFFDC]">
       <div className="container grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <h3 className="max-w-[16ch] font-[family-name:var(--font-newsreader)] text-3xl font-semibold italic leading-tight text-[#CFFFDC]">
-            {companyName}
+            {displayCompanyName}
           </h3>
           <p className="mt-4 text-sm leading-relaxed text-[#CFFFDC]/86">{footerText}</p>
           <p className="mt-6 text-xs uppercase tracking-[0.22em] text-[#68BA7F]">Digital Jurist Platform</p>
@@ -58,6 +58,9 @@ export function Footer({
               Contact
             </Link>
           </div>
+          <div className="mt-5">
+            <VisitorCounter />
+          </div>
         </div>
 
         <div>
@@ -68,21 +71,9 @@ export function Footer({
             <p className="max-w-xs">{address || "Global advisory operations across strategic jurisdictions."}</p>
           </div>
           <div className="mt-4 flex gap-4 text-sm">
-            {linkedin ? (
-              <a href={linkedin} target="_blank" rel="noreferrer" className="text-[#CFFFDC]/88 hover:text-white">
-                LinkedIn
-              </a>
-            ) : null}
-            {instagram ? (
-              <a href={instagram} target="_blank" rel="noreferrer" className="text-[#CFFFDC]/88 hover:text-white">
-                Instagram
-              </a>
-            ) : null}
-            {facebook ? (
-              <a href={facebook} target="_blank" rel="noreferrer" className="text-[#CFFFDC]/88 hover:text-white">
-                Facebook
-              </a>
-            ) : null}
+            <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="text-[#CFFFDC]/88 hover:text-white">
+              LinkedIn
+            </a>
           </div>
         </div>
 
@@ -102,7 +93,7 @@ export function Footer({
       </div>
 
       <div className="container flex flex-col gap-3 py-5 text-xs text-[#CFFFDC]/72 md:flex-row md:items-center md:justify-between">
-        <p>&copy; {year} {companyName}. All rights reserved.</p>
+        <p>&copy; {year} {displayCompanyName}. All rights reserved.</p>
         <div className="flex flex-wrap gap-4">
           <Link href="/services" className="hover:text-white">
             Mandates

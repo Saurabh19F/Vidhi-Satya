@@ -80,7 +80,9 @@ export const enquirySchema = z.object({
   phone: z.string().min(7, "Enter a valid phone number."),
   subject: z.string().min(3),
   message: z.string().min(10),
-  serviceInterested: z.string().optional().default("General Advisory")
+  serviceInterested: z.string().optional().default("General Advisory"),
+  department: z.string().optional().default(""),
+  designation: z.string().optional().default("")
 });
 
 export const contactInfoSchema = z.object({
@@ -90,9 +92,7 @@ export const contactInfoSchema = z.object({
   email: z.string().email(),
   whatsapp: z.string().optional().default(""),
   googleMapLink: z.string().optional().default(""),
-  facebook: z.string().optional().default(""),
-  instagram: z.string().optional().default(""),
-  linkedin: z.string().optional().default(""),
+  linkedin: z.string().optional().default("https://www.linkedin.com/company/east-delhi-law-office/"),
   twitter: z.string().optional().default("")
 });
 

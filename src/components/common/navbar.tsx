@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Insights" },
   { href: "/faq", label: "FAQ" },
@@ -26,6 +25,13 @@ type NavbarProps = {
   siteName?: string;
   serviceLinks?: ServiceNavLink[];
 };
+
+function normalizeServiceTitle(title: string) {
+  if (title.trim().toLowerCase() === "individual strategic guidance") {
+    return "Individual Strategic Advisory";
+  }
+  return title;
+}
 
 export function Navbar({ siteName = "Vidhi Satya", serviceLinks = [] }: NavbarProps) {
   const pathname = usePathname();
@@ -43,12 +49,6 @@ export function Navbar({ siteName = "Vidhi Satya", serviceLinks = [] }: NavbarPr
         </Link>
 
         <nav className="hidden items-center gap-6 lg:gap-10 md:flex">
-          <Link
-            href="/"
-            className={cn("text-sm font-semibold text-muted-foreground transition hover:text-accent", pathname === "/" && "text-accent")}
-          >
-            Home
-          </Link>
           <Link
             href="/about"
             className={cn("text-sm font-semibold text-muted-foreground transition hover:text-accent", pathname === "/about" && "text-accent")}
@@ -79,14 +79,14 @@ export function Navbar({ siteName = "Vidhi Satya", serviceLinks = [] }: NavbarPr
                       pathname === `/services/${service.slug}` && "bg-surface-high text-accent"
                     )}
                   >
-                    {service.title}
+                    {normalizeServiceTitle(service.title)}
                   </Link>
                 ))}
               </div>
             ) : null}
           </div>
 
-          {links.slice(2).map((link) => (
+          {links.slice(1).map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -118,7 +118,7 @@ export function Navbar({ siteName = "Vidhi Satya", serviceLinks = [] }: NavbarPr
       {open ? (
         <div className="bg-surface-bright/80 backdrop-blur-xl md:hidden">
           <div className="container flex flex-col gap-2 py-4">
-            {[links[0], links[1]].map((link) => (
+            {[links[0]].map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -163,13 +163,13 @@ export function Navbar({ siteName = "Vidhi Satya", serviceLinks = [] }: NavbarPr
                       pathname === `/services/${service.slug}` && "bg-surface-high text-foreground"
                     )}
                   >
-                    {service.title}
+                    {normalizeServiceTitle(service.title)}
                   </Link>
                 ))}
               </div>
             </details>
 
-            {links.slice(2).map((link) => (
+            {links.slice(1).map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

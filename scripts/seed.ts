@@ -73,7 +73,7 @@ async function seed() {
     subheading:
       "Outcome-focused delivery for individuals, corporates, and government entities.",
     description:
-      "VidhiSatya.com is established to offer a helping hand to clients facing targets and challenges in their working. Consultation is provided on solicitation basis with fee and expenses borne by the individual, corporate, or government entity seeking advice. Our founder's 35+ years of experience is offered as a valuable asset at fair pricing so clients can make the best use of limited time.",
+      "Vidhi Satya.com is established to offer helping hand to its clients being individuals, corporates and governments facing targets and challenges in their working in any manner. The consultation is subject to solicitation and bearing all fee and expenses by the individual, corporate and government entity, soliciting consultation & advise. Our Founder's experience of more than 35 years in this regard is valuable asset on offer, on fair price. Time is short or limited ever , lets make best of it.",
     vision: "To help clients execute work in a duly compliant manner while remaining truthful in every aspect.",
     mission:
       "To deliver practical consultation and advisory support for individuals, corporates, and governments with clear action pathways.",
@@ -85,7 +85,7 @@ async function seed() {
   await Service.deleteMany({});
   await Service.insertMany([
     {
-      title: "Individual Strategic Guidance",
+      title: "Individual Strategic Advisory",
       slug: "individual-strategic-guidance",
       shortDescription: "Personalized advisory for key life, career, compliance, and financial decisions.",
       fullDescription:
@@ -101,11 +101,11 @@ async function seed() {
       process: ["Discovery call", "Context review", "Strategic recommendation", "Action follow-up"],
       isFeatured: true,
       isPublished: true,
-      seoTitle: "Individual Strategic Guidance | Vidhi Satya",
+      seoTitle: "Individual Strategic Advisory | Vidhi Satya",
       seoDescription: "Confidential advisory for personal and professional decision-making."
     },
     {
-      title: "Corporate Governance & Advisory",
+      title: "Corporate Governance Advisory",
       slug: "corporate-governance-advisory",
       shortDescription: "Governance, compliance, and strategic advisory for leadership and board teams.",
       fullDescription:
@@ -192,9 +192,17 @@ async function seed() {
     },
     {
       question: "Do you provide one-time consultations?",
-      answer: "Yes. One-time consultation and fixed appointment-based advisory engagements are available.",
+      answer: "Yes.",
       category: "Services",
       order: 2,
+      isPublished: true
+    },
+    {
+      question: "Trust?",
+      answer:
+        "All consultation and advise are privy and confidential and rendered in accord with informaiton provided by the concerned person/ organization/ govt. representative, however without prejudice to any information or working sought by any Court of Law. Further vidhisatya.com is not averse to Second Opinion that may be availed or followed at discretion by person soliciting consultation or advise, in their wisdom",
+      category: "Trust",
+      order: 3,
       isPublished: true
     },
     {
@@ -202,14 +210,14 @@ async function seed() {
       answer:
         "All consultation and advisory work remains private and confidential in line with information provided by the concerned person, organization, or government representative. Disclosure is allowed only where required by a court of law.",
       category: "Trust",
-      order: 3,
+      order: 4,
       isPublished: true
     },
     {
       question: "Can clients seek a second opinion?",
-      answer: "Yes. We are not averse to clients availing or following a second opinion at their discretion and wisdom.",
+      answer: "Yes.",
       category: "Trust",
-      order: 4,
+      order: 5,
       isPublished: true
     },
     {
@@ -217,7 +225,7 @@ async function seed() {
       answer:
         "Payments are taken in advance to company bank accounts only, with no credit. Communication and change decisions are expected through designated SPOC channels and formal email workflow.",
       category: "Services",
-      order: 5,
+      order: 6,
       isPublished: true
     }
   ]);
@@ -268,16 +276,14 @@ async function seed() {
 
   await ContactInfo.deleteMany({});
   await ContactInfo.create({
-    companyName: "Vidhisatya.com (Proprietary of East Delhi Law Office)",
+    companyName: "Vidhisatya.com",
     address: "B 28, Ashoka Niketan, Near Yamuna Sports Complex, Delhi-110092, India",
     phone: "+91 98911 47979",
     email: "rajeshnarang@vidhisatya.com",
     whatsapp: "919891147979",
     googleMapLink:
       "https://maps.google.com/maps?q=B%2028%2C%20Ashoka%20Niketan%2C%20Near%20Yamuna%20Sports%20Complex%2C%20Delhi-110092%2C%20India&z=15&output=embed",
-    facebook: "https://facebook.com/vidhisatya",
-    instagram: "https://instagram.com/vidhisatya",
-    linkedin: "https://linkedin.com/company/vidhisatya",
+    linkedin: "https://www.linkedin.com/company/east-delhi-law-office/",
     twitter: "https://x.com/vidhisatya"
   });
 
@@ -288,7 +294,7 @@ async function seed() {
     faviconUrl: "https://placehold.co/64x64/1D4ED8/F8FAFC?text=VS",
     primaryColor: "#0F172A",
     secondaryColor: "#1D4ED8",
-    footerText: "Vidhisatya.com is proprietary of East Delhi Law Office (a law firm).",
+    footerText: "Trusted legal and strategic advisory with practical execution.",
     ctaText: "Book Consultation or Associate with Us"
   });
 

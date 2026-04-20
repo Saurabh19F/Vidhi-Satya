@@ -1,5 +1,6 @@
 import { buildPageMetadata } from "@/lib/seo";
 import { connectToDatabase } from "@/lib/db";
+import { sortServicesByPriority } from "@/lib/service-order";
 import Service from "@/models/Service";
 import { ConsultationForm } from "@/components/forms/consultation-form";
 import { PageBanner } from "@/components/common/page-banner";
@@ -14,7 +15,7 @@ export async function generateMetadata() {
 
 export default async function BookConsultationPage() {
   await connectToDatabase();
-  const services = (await Service.find({ isPublished: true }).sort({ createdAt: -1 }).lean()) as unknown as ServiceItem[];
+  const services = sortServicesByPriority((await Service.find({ isPublished: true }).lean()) as unknown as ServiceItem[]);
   const options = services.map((s) => s.title);
 
   return (
@@ -57,15 +58,11 @@ export default async function BookConsultationPage() {
                 <div className="mt-4 rounded-[0.75rem] bg-surface p-4 ring-1 ring-outline-variant/15">
                   <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">Declaration</p>
                   <ul className="mt-2 list-decimal space-y-2 pl-5 text-sm text-foreground/90">
-                    <li>I am competent and voluntarily seeking consultation from vidhisatya.com.</li>
-                    <li>I am responsible for giving updated and complete information to vidhisatya.com.</li>
-                    <li>I agree that information provided may be retained by vidhisatya.com for use and record.</li>
-                    <li>
-                      I (or my organization) agree to pay all fees and expenses of vidhisatya.com and recommended partners/assignees.
-                    </li>
-                    <li>
-                      I undertake to keep vidhisatya.com indemnified from any loss arising out of non-adherence to advised actions.
-                    </li>
+                    <li>I am competnent and voluntarily cosulataion from vidhisatya.com.</li>
+                    <li>I am reponsaable for giving updated &amp; complete information to VidhiSatya.com.</li>
+                    <li>I agree that information given by me shall remain with vidhisatya.com for use and record.</li>
+                    <li>I/my orgainzation agree to pay all fee and expenses of vidhisatya.com &amp; there recommeded partner and assigns.</li>
+                    <li>I undertake to keep vidhisatya.com indemnified from any loss that may occur from any non-adherance to their advise.</li>
                   </ul>
                 </div>
                 <p className="mt-3 text-sm text-muted-foreground">Purpose: Use submitted information for advisory workflow and case setup.</p>

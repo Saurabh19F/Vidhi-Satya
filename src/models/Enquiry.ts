@@ -8,6 +8,8 @@ const enquirySchema = new Schema(
     subject: { type: String, required: true },
     message: { type: String, required: true },
     serviceInterested: { type: String, default: "General Advisory" },
+    department: { type: String, default: "" },
+    designation: { type: String, default: "" },
     status: {
       type: String,
       enum: ["new", "contacted", "closed"],

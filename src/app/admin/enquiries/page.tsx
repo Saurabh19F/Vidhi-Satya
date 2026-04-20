@@ -21,6 +21,8 @@ type Enquiry = {
   subject: string;
   message: string;
   serviceInterested: string;
+  department?: string;
+  designation?: string;
   status: "new" | "contacted" | "closed";
   createdAt: string;
 };
@@ -99,6 +101,8 @@ export default function AdminEnquiriesPage() {
               <TableCell>
                 <p>{row.subject}</p>
                 <p className="text-xs text-muted-foreground">{row.serviceInterested}</p>
+                {row.department ? <p className="text-xs text-muted-foreground">Department: {row.department}</p> : null}
+                {row.designation ? <p className="text-xs text-muted-foreground">Designation: {row.designation}</p> : null}
               </TableCell>
               <TableCell>
                 <Select value={row.status} onValueChange={(value) => updateStatus(row._id, value as Enquiry["status"])}>

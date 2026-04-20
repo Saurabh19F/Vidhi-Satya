@@ -67,8 +67,6 @@ export type ContactInfoItem = {
   email: string;
   whatsapp: string;
   googleMapLink: string;
-  facebook: string;
-  instagram: string;
   linkedin: string;
   twitter: string;
 };
