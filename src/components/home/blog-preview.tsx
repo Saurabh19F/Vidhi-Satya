@@ -54,6 +54,51 @@ export function BlogPreview({ blogs }: BlogPreviewProps) {
           title="Latest Advisory Perspectives"
           description="Research-backed briefs that translate regulatory, strategic, and execution complexity into clear direction."
         />
+        <Card className="mt-8 max-w-3xl">
+          <CardContent className="p-6 sm:p-8 lg:p-10">
+            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">Team Member</p>
+            <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-start">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full ring-1 ring-outline-variant/20">
+                <Image
+                  src="/uploads/rajesh-narang.jpg"
+                  alt="Rajesh Narang, founder and mentor at Vidhi Satya"
+                  fill
+                  sizes="96px"
+                  className="object-cover"
+                />
+              </div>
+              <div className="min-w-0">
+                <p className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold sm:text-4xl">Rajesh Narang</p>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
+                  Founder and mentor with 35+ years of advisory experience across individual, corporate, and government matters.
+                </p>
+                <details className="mt-3">
+                  <summary className="inline-flex cursor-pointer list-none rounded-[0.6rem] bg-surface-high px-3 py-1.5 text-sm font-semibold text-accent ring-1 ring-outline-variant/20">
+                    Show Detailed Profile
+                  </summary>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
+                    He has guided decision-makers on governance, compliance, strategic positioning, risk management, and execution planning
+                    for complex mandates. His advisory approach combines practical legal-business judgment, structured implementation support,
+                    and confidential stakeholder alignment for high-impact outcomes.
+                  </p>
+                  <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
+                    Over the years, he has supported founders, leadership teams, and institutions in setting clear priorities, resolving
+                    operational bottlenecks, and executing time-sensitive decisions with accountability. His work emphasizes actionable
+                    roadmaps, disciplined follow-through, and measurable progress from planning to implementation.
+                  </p>
+                  <a
+                    href="https://www.linkedin.com/in/rajesh-narang-b405bb32/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-block text-sm font-semibold text-accent hover:underline"
+                  >
+                    View LinkedIn Profile
+                  </a>
+                </details>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <Card>
@@ -158,32 +203,6 @@ export function BlogPreview({ blogs }: BlogPreviewProps) {
             </MotionReveal>
           ))}
         </div>
-        <Card className="mt-8 max-w-xl">
-          <CardContent className="p-5">
-            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">Team Member</p>
-            <div className="mt-3 relative h-20 w-20 overflow-hidden rounded-full ring-1 ring-outline-variant/20">
-              <Image
-                src="/uploads/rajesh-narang.jpg"
-                alt="Rajesh Narang, founder and mentor at Vidhi Satya"
-                fill
-                sizes="80px"
-                className="object-cover"
-              />
-            </div>
-            <p className="mt-2 font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Rajesh Narang</p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Founder and mentor with 35+ years of advisory experience across individual, corporate, and government matters.
-            </p>
-            <a
-              href="https://www.linkedin.com/company/east-delhi-law-office/"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 inline-block text-sm font-semibold text-accent hover:underline"
-            >
-              View LinkedIn Profile
-            </a>
-          </CardContent>
-        </Card>
         <div className="mt-8">
           <Button asChild variant="default">
             <Link href="/blog">View All Insights</Link>
