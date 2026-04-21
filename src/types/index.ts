@@ -31,6 +31,7 @@ export type ServiceItem = {
   isPublished: boolean;
   seoTitle: string;
   seoDescription: string;
+  updatedAt?: string | Date;
 };
 
 export type BlogItem = {
@@ -46,6 +47,7 @@ export type BlogItem = {
   publishedAt: string | Date;
   seoTitle: string;
   seoDescription: string;
+  updatedAt?: string | Date;
 };
 
 export type AboutItem = {
@@ -80,6 +82,7 @@ export type SiteSettingItem = {
   secondaryColor: string;
   footerText: string;
   ctaText: string;
+  updatedAt?: string | Date;
 };
 
 export type SeoItem = {

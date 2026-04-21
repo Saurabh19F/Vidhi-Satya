@@ -3,11 +3,16 @@ import Image from "next/image";
 import { buildPageMetadata } from "@/lib/seo";
 import { getPublicAboutData } from "@/lib/public-cache";
 import { CTASection } from "@/components/common/cta-section";
+import { StructuredData } from "@/components/common/structured-data";
 import { SectionTitle } from "@/components/common/section-title";
 import { Card, CardContent } from "@/components/ui/card";
+import { buildWebPageJsonLd } from "@/lib/structured-data";
 
 export async function generateMetadata() {
-  return buildPageMetadata("about");
+  return buildPageMetadata("about", {
+    pathname: "/about",
+    ogImage: "/uploads/about-main.jpeg"
+  });
 }
 
 export default async function AboutPage() {
@@ -17,9 +22,17 @@ export default async function AboutPage() {
   const aboutDescription = about?.description?.includes("VidhiSatya.com is established to offer a helping hand")
     ? requestedAboutDescription
     : about?.description?.trim() || requestedAboutDescription;
+  const aboutPageSchema = buildWebPageJsonLd({
+    pathname: "/about",
+    type: "AboutPage",
+    title: about?.heading || "About Vidhi Satya",
+    description: aboutDescription,
+    imageUrl: about?.imageUrl || "/uploads/about-main.jpeg"
+  });
 
   return (
     <>
+      <StructuredData data={aboutPageSchema} />
       <section className="section-padding">
         <div className="container grid gap-8 md:grid-cols-2 md:items-start md:gap-10">
           <div>
@@ -34,7 +47,13 @@ export default async function AboutPage() {
           <Card className="overflow-hidden">
             <CardContent className="p-0">
               <div className="relative h-[280px] sm:h-[340px] md:h-[380px]">
-                <Image src="/uploads/about-main.jpeg" alt="About Vidhi Satya" fill className="object-cover" />
+                <Image
+                  src={about?.imageUrl || "/uploads/about-main.jpeg"}
+                  alt="Vidhi Satya team discussion for strategic advisory planning"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                  className="object-cover"
+                />
               </div>
             </CardContent>
           </Card>

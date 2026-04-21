@@ -1,27 +1,49 @@
 import { buildPageMetadata } from "@/lib/seo";
-import { getPublicContactData, getPublicServicesData } from "@/lib/public-cache";
+import { getPublicContactData, getPublicLayoutData, getPublicServicesData } from "@/lib/public-cache";
+import { StructuredData } from "@/components/common/structured-data";
 import { ConsultationForm } from "@/components/forms/consultation-form";
 import { SectionTitle } from "@/components/common/section-title";
 import { Card, CardContent } from "@/components/ui/card";
 import { sanitizeCompanyName } from "@/lib/brand-text";
+import { buildItemListJsonLd, buildWebPageJsonLd } from "@/lib/structured-data";
 import type { ServiceItem } from "@/types";
 
 export async function generateMetadata() {
-  return buildPageMetadata("contact");
+  return buildPageMetadata("contact", {
+    pathname: "/contact",
+    ogImage: "/brand/vidhi-satya-logo.png"
+  });
 }
 
 export default async function ContactPage() {
-  const info = await getPublicContactData();
-  const services = (await getPublicServicesData()) as ServiceItem[];
+  const [info, services, layoutData] = await Promise.all([
+    getPublicContactData(),
+    getPublicServicesData(),
+    getPublicLayoutData()
+  ]);
+  const serviceItems = services as ServiceItem[];
   const serviceOptions = services.map((service) => service.title);
   const companyName = sanitizeCompanyName(info?.companyName);
   const fallbackAddress = "B 28, Ashoka Niketan, Near Yamuna Sports Complex, Delhi-110092, India";
   const mapSource =
     info?.googleMapLink?.trim() ||
     `https://maps.google.com/maps?q=${encodeURIComponent(info?.address?.trim() || fallbackAddress)}&z=15&output=embed`;
+  const contactPageSchema = buildWebPageJsonLd({
+    pathname: "/contact",
+    type: "ContactPage",
+    title: "Contact Us",
+    description: "Reach us for consultation, association, and service enquiries.",
+    imageUrl: layoutData.settings?.logoUrl || "/brand/vidhi-satya-logo.png"
+  });
+  const serviceOptionsSchema = buildItemListJsonLd({
+    pathname: "/contact",
+    name: "Consultation Service Options",
+    itemPaths: serviceItems.map((service) => `/services/${service.slug}`)
+  });
 
   return (
     <>
+      <StructuredData data={[contactPageSchema, serviceOptionsSchema]} />
       <section className="section-padding">
         <div className="container grid gap-8 md:grid-cols-2">
           <div className="md:col-span-2">

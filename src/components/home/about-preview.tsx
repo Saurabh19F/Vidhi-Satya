@@ -30,7 +30,13 @@ export function AboutPreview({ about }: AboutPreviewProps) {
           <Card className="overflow-hidden">
             <CardContent className="p-0">
               <div className="relative h-[260px] sm:h-[320px] md:h-[340px]">
-                <Image src="/uploads/about-main.jpeg" alt={about.heading} fill className="object-cover" />
+                <Image
+                  src={about.imageUrl || "/uploads/about-main.jpeg"}
+                  alt={`${about.heading} - Vidhi Satya advisory overview`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                  className="object-cover"
+                />
               </div>
             </CardContent>
           </Card>

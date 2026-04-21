@@ -67,8 +67,9 @@ export function CinematicLogoIntro() {
           >
             <Image
               src="/brand/vidhi-satya-logo.png"
-              alt="Vidhi Satya eco logo"
+              alt="Vidhi Satya brand logo"
               fill
+              sizes="(max-width: 768px) 100vw, 1200px"
               priority
               className="object-cover object-center"
             />

@@ -52,7 +52,7 @@ export function ImageUploadField({ value, onChange, label = "Image" }: ImageUplo
       ) : null}
       {value ? (
         <div className="relative h-40 w-full overflow-hidden rounded-lg border">
-          <Image src={value} alt={label} fill className="object-cover" />
+          <Image src={value} alt={label} fill sizes="(max-width: 768px) 100vw, 640px" className="object-cover" />
         </div>
       ) : null}
     </div>

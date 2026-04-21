@@ -5,10 +5,12 @@ import { format } from "date-fns";
 import { buildPageMetadata } from "@/lib/seo";
 import { getPublicBlogsData } from "@/lib/public-cache";
 import { CTASection } from "@/components/common/cta-section";
+import { StructuredData } from "@/components/common/structured-data";
 import { SectionTitle } from "@/components/common/section-title";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { resolveBlogImage } from "@/lib/blog-image";
+import { buildItemListJsonLd, buildWebPageJsonLd } from "@/lib/structured-data";
 import type { BlogItem } from "@/types";
 
 type Props = {
@@ -16,7 +18,10 @@ type Props = {
 };
 
 export async function generateMetadata() {
-  return buildPageMetadata("blog");
+  return buildPageMetadata("blog", {
+    pathname: "/blog",
+    ogImage: "/uploads/blog-designing-public-programs.jpeg"
+  });
 }
 
 export default async function BlogPage({ searchParams }: Props) {
@@ -25,9 +30,22 @@ export default async function BlogPage({ searchParams }: Props) {
   const blogs = (await getPublicBlogsData(search, tag)) as BlogItem[];
   const featured = blogs[0];
   const topTags = Array.from(new Set(blogs.flatMap((blog) => blog.tags))).slice(0, 8);
+  const blogCollectionSchema = buildWebPageJsonLd({
+    pathname: "/blog",
+    type: "CollectionPage",
+    title: "Insights & Articles",
+    description: "Practical perspectives on governance, strategy, and execution.",
+    imageUrl: featured ? resolveBlogImage(featured) : "/uploads/blog-designing-public-programs.jpeg"
+  });
+  const blogListSchema = buildItemListJsonLd({
+    pathname: "/blog",
+    name: "Blog Articles",
+    itemPaths: blogs.map((blog) => `/blog/${blog.slug}`)
+  });
 
   return (
     <>
+      <StructuredData data={[blogCollectionSchema, blogListSchema]} />
       <section className="section-padding">
         <div className="container">
           <SectionTitle
@@ -77,7 +95,13 @@ export default async function BlogPage({ searchParams }: Props) {
             <Card className="overflow-hidden">
               <div className="grid md:grid-cols-2">
                 <div className="relative h-64 sm:h-72 md:h-full">
-                  <Image src={resolveBlogImage(featured)} alt={featured.title} fill className="object-cover" />
+                  <Image
+                    src={resolveBlogImage(featured)}
+                    alt={`${featured.title} featured advisory insight`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
                 </div>
                 <CardContent className="p-6 sm:p-8">
                   <Badge>Featured</Badge>
@@ -97,7 +121,13 @@ export default async function BlogPage({ searchParams }: Props) {
             {blogs.slice(1).map((blog) => (
               <Card key={String(blog._id)} className="overflow-hidden">
                 <div className="relative h-48">
-                  <Image src={resolveBlogImage(blog)} alt={blog.title} fill className="object-cover" />
+                  <Image
+                    src={resolveBlogImage(blog)}
+                    alt={`${blog.title} article cover image`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl">{blog.title}</CardTitle>
@@ -123,7 +153,13 @@ export default async function BlogPage({ searchParams }: Props) {
             <CardContent className="p-5">
               <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">Team Member</p>
               <div className="mt-3 relative h-20 w-20 overflow-hidden rounded-full ring-1 ring-outline-variant/20">
-                <Image src="/uploads/rajesh-narang.jpg" alt="Rajesh Narang" fill className="object-cover" />
+                <Image
+                  src="/uploads/rajesh-narang.jpg"
+                  alt="Rajesh Narang, founder and mentor at Vidhi Satya"
+                  fill
+                  sizes="80px"
+                  className="object-cover"
+                />
               </div>
               <p className="mt-2 font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Rajesh Narang</p>
               <p className="mt-2 text-sm text-muted-foreground">

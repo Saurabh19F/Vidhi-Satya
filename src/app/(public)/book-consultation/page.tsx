@@ -4,22 +4,40 @@ import { sortServicesByPriority } from "@/lib/service-order";
 import Service from "@/models/Service";
 import { ConsultationForm } from "@/components/forms/consultation-form";
 import { PageBanner } from "@/components/common/page-banner";
+import { StructuredData } from "@/components/common/structured-data";
 import { SectionTitle } from "@/components/common/section-title";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { buildItemListJsonLd, buildWebPageJsonLd } from "@/lib/structured-data";
 import type { ServiceItem } from "@/types";
 
 export async function generateMetadata() {
-  return buildPageMetadata("book-consultation");
+  return buildPageMetadata("book-consultation", {
+    pathname: "/book-consultation",
+    ogImage: "/brand/vidhi-satya-logo.png"
+  });
 }
 
 export default async function BookConsultationPage() {
   await connectToDatabase();
   const services = sortServicesByPriority((await Service.find({ isPublished: true }).lean()) as unknown as ServiceItem[]);
   const options = services.map((s) => s.title);
+  const consultationPageSchema = buildWebPageJsonLd({
+    pathname: "/book-consultation",
+    type: "WebPage",
+    title: "Book Consultation",
+    description: "Schedule a strategic consultation with the appropriate advisory lead.",
+    imageUrl: "/brand/vidhi-satya-logo.png"
+  });
+  const consultationOptionsSchema = buildItemListJsonLd({
+    pathname: "/book-consultation",
+    name: "Consultation Categories",
+    itemPaths: services.map((service) => `/services/${service.slug}`)
+  });
 
   return (
     <>
+      <StructuredData data={[consultationPageSchema, consultationOptionsSchema]} />
       <PageBanner
         title="Book Consultation"
         description="Share your context and we will schedule a strategic consultation with the appropriate advisory lead."

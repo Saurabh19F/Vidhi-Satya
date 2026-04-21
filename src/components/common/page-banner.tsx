@@ -28,7 +28,7 @@ export function PageBanner({ title, description, logoSrc, logoAlt = "Vidhi Satya
       <div className="container">
         {logoSrc ? (
           <div className="relative mb-5 h-10 w-[180px] sm:h-14 sm:w-[260px]">
-            <Image src={logoSrc} alt={logoAlt} fill className="object-contain object-left" />
+            <Image src={logoSrc} alt={logoAlt} fill sizes="260px" className="object-contain object-left" />
           </div>
         ) : null}
         <SectionTitle

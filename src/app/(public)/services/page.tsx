@@ -5,10 +5,12 @@ import { buildPageMetadata } from "@/lib/seo";
 import { getPublicServicesData } from "@/lib/public-cache";
 import { resolveServiceImage } from "@/lib/service-image";
 import { CTASection } from "@/components/common/cta-section";
+import { StructuredData } from "@/components/common/structured-data";
 import { SectionTitle } from "@/components/common/section-title";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { buildItemListJsonLd, buildWebPageJsonLd } from "@/lib/structured-data";
 import type { ServiceItem } from "@/types";
 
 const serviceTracks = [
@@ -105,14 +107,30 @@ const confidentialityRules = [
 ];
 
 export async function generateMetadata() {
-  return buildPageMetadata("services");
+  return buildPageMetadata("services", {
+    pathname: "/services",
+    ogImage: "/uploads/service-cor.jpeg"
+  });
 }
 
 export default async function ServicesPage() {
   const services = (await getPublicServicesData()) as ServiceItem[];
+  const servicesCollectionSchema = buildWebPageJsonLd({
+    pathname: "/services",
+    type: "CollectionPage",
+    title: "Services",
+    description: "Strategic advisory offerings for individuals, enterprises, and institutions.",
+    imageUrl: services[0] ? resolveServiceImage(services[0].imageUrl, services[0].category, services[0].title) : "/uploads/service-cor.jpeg"
+  });
+  const serviceListSchema = buildItemListJsonLd({
+    pathname: "/services",
+    name: "Service Directory",
+    itemPaths: services.map((service) => `/services/${service.slug}`)
+  });
 
   return (
     <>
+      <StructuredData data={[servicesCollectionSchema, serviceListSchema]} />
       <section className="section-padding">
         <div className="container">
           <SectionTitle
@@ -126,8 +144,9 @@ export default async function ServicesPage() {
               <div className="relative h-48">
                 <Image
                   src={resolveServiceImage(service.imageUrl, service.category, service.title)}
-                  alt={service.title}
+                  alt={`${service.title} service offering illustration`}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                   className="object-cover"
                 />
               </div>

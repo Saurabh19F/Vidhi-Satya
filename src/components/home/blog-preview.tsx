@@ -95,7 +95,13 @@ export function BlogPreview({ blogs }: BlogPreviewProps) {
             <Card className="mt-10 overflow-hidden">
               <div className="grid gap-0 md:grid-cols-[1.05fr_0.95fr]">
                 <div className="relative min-h-[240px] sm:min-h-[300px]">
-                  <Image src={resolveBlogImage(featured)} alt={featured.title} fill className="object-cover" />
+                  <Image
+                    src={resolveBlogImage(featured)}
+                    alt={`${featured.title} featured insight article`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
                 </div>
                 <CardContent className="p-6 sm:p-8">
                   <Badge>Featured Insight</Badge>
@@ -123,7 +129,13 @@ export function BlogPreview({ blogs }: BlogPreviewProps) {
             <MotionReveal key={blog._id} delay={idx * 0.05 + 0.08}>
               <Card className="overflow-hidden">
                 <div className="relative h-48">
-                  <Image src={resolveBlogImage(blog)} alt={blog.title} fill className="object-cover" />
+                  <Image
+                    src={resolveBlogImage(blog)}
+                    alt={`${blog.title} article cover image`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl">{blog.title}</CardTitle>
@@ -150,7 +162,13 @@ export function BlogPreview({ blogs }: BlogPreviewProps) {
           <CardContent className="p-5">
             <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">Team Member</p>
             <div className="mt-3 relative h-20 w-20 overflow-hidden rounded-full ring-1 ring-outline-variant/20">
-              <Image src="/uploads/rajesh-narang.jpg" alt="Rajesh Narang" fill className="object-cover" />
+              <Image
+                src="/uploads/rajesh-narang.jpg"
+                alt="Rajesh Narang, founder and mentor at Vidhi Satya"
+                fill
+                sizes="80px"
+                className="object-cover"
+              />
             </div>
             <p className="mt-2 font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Rajesh Narang</p>
             <p className="mt-2 text-sm text-muted-foreground">

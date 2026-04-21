@@ -43,7 +43,14 @@ export function Navbar({ siteName = "Vidhi Satya", serviceLinks = [] }: NavbarPr
       <div className="container flex h-16 items-center justify-between gap-3 sm:h-20">
         <Link href="/" aria-label={siteName} className="flex items-center">
           <span className="relative h-9 w-[108px] sm:h-10 sm:w-[132px]">
-            <Image src="/brand/vidhi-satya-logo-tight.png" alt={siteName} fill priority className="object-contain object-left" />
+            <Image
+              src="/brand/vidhi-satya-logo-tight.png"
+              alt={`${siteName} logo`}
+              fill
+              sizes="132px"
+              priority
+              className="object-contain object-left"
+            />
           </span>
           <span className="sr-only">{siteName}</span>
         </Link>

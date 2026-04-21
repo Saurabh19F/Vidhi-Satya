@@ -80,7 +80,14 @@ export function HeroSection({ slides }: HeroSectionProps) {
             transition={{ duration: 0.45 }}
             className="relative h-[280px] overflow-hidden rounded-[0.75rem] bg-surface-high/85 shadow-ambient ring-1 ring-outline-variant/15 sm:h-[360px] md:h-[520px]"
           >
-            <Image src={current.imageUrl} alt={current.title} fill className="object-cover" priority />
+            <Image
+              src={current.imageUrl}
+              alt={`${current.title} hero visual for strategic advisory services`}
+              fill
+              sizes="(max-width: 768px) 100vw, 42vw"
+              className="object-cover"
+              priority
+            />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
           </motion.div>
         </AnimatePresence>
