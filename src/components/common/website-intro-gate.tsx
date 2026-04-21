@@ -76,7 +76,6 @@ export function WebsiteIntroGate({ children }: WebsiteIntroGateProps) {
               muted
               playsInline
               preload="metadata"
-              poster="/brand/vidhi-satya-logo-tight.png"
               onEnded={closeIntro}
               onError={closeIntro}
             >
