@@ -44,24 +44,13 @@ async function seed() {
     },
     {
       title: "One-Time Consultation & Ongoing Advisory",
-      subtitle: "Fix Appointment • UPI / Vidhisatya.com",
+      subtitle: "Fix Appointment • UPI / vidhisatya.com",
       description:
         "Engage for one-time consultation or continuous support through structured appointment-based advisory engagement.",
       buttonText: "Explore Services",
       buttonLink: "/services",
       imageUrl: "https://placehold.co/1200x800/1D4ED8/F8FAFC?text=Corporate+Advisory",
       order: 2,
-      isPublished: true
-    },
-    {
-      title: "Vision & Mission Aligned Execution",
-      subtitle: "Compliant • Truthful • Outcome-Focused",
-      description:
-        "Our approach helps clients execute decisions in a duly compliant manner while staying truthful and accountable in every aspect.",
-      buttonText: "Contact Team",
-      buttonLink: "/contact",
-      imageUrl: "https://placehold.co/1200x800/14B8A6/0F172A?text=Government+Advisory",
-      order: 3,
       isPublished: true
     }
   ]);
@@ -72,7 +61,7 @@ async function seed() {
     subheading:
       "Outcome-focused delivery for individuals, corporates, and government entities.",
     description:
-      "Vidhi Satya.com is established to offer helping hand to its clients being individuals, corporates and governments facing targets and challenges in their working in any manner. The consultation is subject to solicitation and bearing all fee and expenses by the individual, corporate and government entity, soliciting consultation & advise. Our Founder's experience of more than 35 years in this regard is valuable asset on offer, on fair price. Time is short or limited ever , lets make best of it.",
+      "vidhisatya.com is established to offer helping hand to its clients being individuals, corporates and governments facing targets and challenges in their working in any manner. The consultation is subject to solicitation and bearing all fee and expenses by the individual, corporate and government entity, soliciting consultation & advise. Our Founder's experience of more than 35 years in this regard is valuable asset on offer, on fair price. Time is short or limited ever , lets make best of it.",
     vision: "To help clients execute work in a duly compliant manner while remaining truthful in every aspect.",
     mission:
       "To deliver practical consultation and advisory support for individuals, corporates, and governments with clear action pathways.",
@@ -92,12 +81,7 @@ async function seed() {
       category: "Individual Guidance",
       icon: "user-round",
       imageUrl: "https://placehold.co/900x600/1D4ED8/F8FAFC?text=Individual+Guidance",
-      benefits: [
-        "Personalized strategic framework",
-        "Confidential and ethical guidance",
-        "Decision clarity across legal/business implications"
-      ],
-      process: ["Discovery call", "Context review", "Strategic recommendation", "Action follow-up"],
+
       isFeatured: true,
       isPublished: true,
       seoTitle: "Individual Strategic Advisory | Vidhi Satya",
@@ -112,19 +96,13 @@ async function seed() {
       category: "Corporate Advisory",
       icon: "building-2",
       imageUrl: "https://placehold.co/900x600/0F172A/F8FAFC?text=Corporate+Advisory",
-      benefits: [
-        "Board-ready strategic insights",
-        "Governance and compliance integration",
-        "Execution-focused advisory roadmaps"
-      ],
-      process: ["Stakeholder alignment", "Governance assessment", "Strategic model", "Execution support"],
       isFeatured: true,
       isPublished: true,
       seoTitle: "Corporate Governance Advisory | Vidhi Satya",
       seoDescription: "Premium corporate advisory for governance, risk, and strategic execution."
     },
     {
-      title: "Government Policy Advisory",
+      title: "Government Project Advisory",
       slug: "government-policy-advisory",
       shortDescription: "Policy-sensitive advisory support for public institutions and programs.",
       fullDescription:
@@ -132,15 +110,9 @@ async function seed() {
       category: "Government Advisory",
       icon: "landmark",
       imageUrl: "https://placehold.co/900x600/14B8A6/0F172A?text=Government+Advisory",
-      benefits: [
-        "Policy-aligned decision support",
-        "Institutional implementation clarity",
-        "Accountability and impact measurement"
-      ],
-      process: ["Policy mapping", "Feasibility analysis", "Execution blueprint", "Performance review"],
       isFeatured: false,
       isPublished: true,
-      seoTitle: "Government Policy Advisory | Vidhi Satya",
+      seoTitle: "Government Project Advisory | Vidhi Satya",
       seoDescription: "Strategic advisory for institutions and public-sector programs."
     }
   ]);
@@ -199,7 +171,7 @@ async function seed() {
     {
       question: "Trust?",
       answer:
-        "All consultation and advise are privy and confidential and rendered in accord with informaiton provided by the concerned person/ organization/ govt. representative, however without prejudice to any information or working sought by any Court of Law. Further vidhisatya.com is not averse to Second Opinion that may be availed or followed at discretion by person soliciting consultation or advise, in their wisdom",
+        "All consultation and advise are privy and confidential and rendered in accord with information provided by the concerned person/ organization/ govt. representative, however without prejudice to any information or working sought by any Court of Law. Further vidhisatya.com is not averse to Second Opinion that may be availed or followed at discretion by person soliciting consultation or advise, in their wisdom",
       category: "Trust",
       order: 3,
       isPublished: true
@@ -222,24 +194,25 @@ async function seed() {
     {
       question: "What are the payment and communication terms?",
       answer:
-        "Payments are taken in advance to company bank accounts only, with no credit. Communication and change decisions are expected through designated SPOC channels and formal email workflow.",
+        "Payments are taken in advance to vidhisatya.com/ Rajesh Narang's accounts only, with no credit. Communication and change decisions are expected through designated SPOC channels and formal email workflow.",
       category: "Services",
       order: 6,
       isPublished: true
-    }
+    },
   ]);
 
   await ContactInfo.deleteMany({});
   await ContactInfo.create({
-    companyName: "Vidhisatya.com",
+    companyName: "vidhisatya.com",
     address: "B 28, Ashoka Niketan, Near Yamuna Sports Complex, Delhi-110092, India",
     phone: "+91 98911 47979",
-    email: "rajeshnarang@vidhisatya.com",
+    email: "rajeshnarang@vidhisatya.com" ,
+    email2: "avikanarang@vidhisatya.com",
     whatsapp: "919891147979",
     googleMapLink:
       "https://maps.google.com/maps?q=B%2028%2C%20Ashoka%20Niketan%2C%20Near%20Yamuna%20Sports%20Complex%2C%20Delhi-110092%2C%20India&z=15&output=embed",
     linkedin: "https://www.linkedin.com/company/east-delhi-law-office/",
-    twitter: "https://x.com/vidhisatya"
+    Facebook: "https://www.facebook.com/rnarang.del",
   });
 
   await SiteSetting.deleteMany({});

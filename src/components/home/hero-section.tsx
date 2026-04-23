@@ -22,17 +22,24 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({ slides }: HeroSectionProps) {
+  const filteredSlides = slides.filter(
+    (slide) => !/vision\s*&\s*mission\s*aligned\s*execution/i.test(slide.title ?? "")
+  );
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (slides.length <= 1) return;
+    if (index >= filteredSlides.length) setIndex(0);
+  }, [filteredSlides.length, index]);
+
+  useEffect(() => {
+    if (filteredSlides.length <= 1) return;
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % slides.length);
+      setIndex((prev) => (prev + 1) % filteredSlides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [filteredSlides.length]);
 
-  const current = slides[index];
+  const current = filteredSlides[index];
   const sanitizedSubtitle = current?.subtitle
     ?.replace(/\s*[•|·-]?\s*UPI\s*\/\s*VIDHISATYA\.COM\s*/i, " ")
     ?.replace(/\s*[•|·-]\s*$/, "")

@@ -33,8 +33,8 @@ export function WhyChooseUs() {
       <div className="container">
         <SectionTitle
           eyebrow="Why Choose Us"
-          title="Trusted for High-Stakes Advisory Decisions"
-          description="Vidhi Satya is built for stakeholders who need actionable insight, policy sensitivity, and dependable execution."
+          title="Trusted for Strategic and High-Stakes Decisions"
+          description="Vidhi Satya stands for the stakeholders who need actionable insight, policy sensitivity in all high-stake decisions and dependable execution."
         />
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {points.map((point, idx) => (

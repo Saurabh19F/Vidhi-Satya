@@ -8,19 +8,18 @@ type FooterProps = {
   footerText?: string;
   address?: string;
   phone?: string;
-  email?: string;
 };
 
 const LINKEDIN_URL = "https://www.linkedin.com/company/east-delhi-law-office/";
+const FACEBOOK_URL = "https://www.facebook.com/rnarang.del";
+
 
 export function Footer({
   companyName = "Vidhi Satya Advisory LLP",
   footerText = "Trusted advisory with practical execution.",
   address,
-  phone,
-  email
+  phone
 }: FooterProps) {
-  const year = new Date().getFullYear();
   const displayCompanyName = sanitizeCompanyName(companyName);
 
   return (
@@ -31,7 +30,7 @@ export function Footer({
             {displayCompanyName}
           </h3>
           <p className="mt-4 text-sm leading-relaxed text-[#CFFFDC]/86">{footerText}</p>
-          <p className="mt-6 text-xs uppercase tracking-[0.22em] text-[#68BA7F]">Digital Jurist Platform</p>
+          <p className="mt-6 text-xs uppercase tracking-[0.22em] text-[#68BA7F]">Platform for Wisdom and Jurist Prudence</p>
           <div className="mt-3 flex flex-wrap gap-2 text-xs text-[#CFFFDC]/84">
             <span className="rounded-full bg-[#2E6F40] px-3 py-1">Strategy</span>
             <span className="rounded-full bg-[#2E6F40] px-3 py-1">Compliance</span>
@@ -66,7 +65,7 @@ export function Footer({
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#68BA7F]">Contact Desk</p>
           <div className="mt-4 space-y-2 text-sm text-[#CFFFDC]/88">
-            <p>{email || "advisory@vidhisatya.com"}</p>
+            <p>rajeshnarang@vidhisatya.com, avikanarang@vidhisatya.com</p>
             <p>{phone || "+1 (800) SATYA-01"}</p>
             <p className="max-w-xs">{address || "Global advisory operations across strategic jurisdictions."}</p>
           </div>
@@ -74,13 +73,16 @@ export function Footer({
             <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="text-[#CFFFDC]/88 hover:text-white">
               LinkedIn
             </a>
+            <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" className="text-[#CFFFDC]/88 hover:text-white">
+              Facebook
+            </a>
           </div>
         </div>
 
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#68BA7F]">Engage</p>
           <p className="mt-4 text-sm text-[#CFFFDC]/88">
-            Book a consultation and receive a focused mandate brief tailored to your case context.
+            Book a consultation and receive a focused mandate tailored to your case context.
           </p>
           <Link
             href="/book-consultation"
@@ -88,12 +90,22 @@ export function Footer({
           >
             Start Consultation
           </Link>
-          <p className="mt-3 text-xs text-[#CFFFDC]/70">Average response window: 1 business day</p>
+          <p className="mt-3 text-xs text-[#CFFFDC]/70">Average response window: 1 business day / 24 business hours</p>
         </div>
       </div>
 
       <div className="container flex flex-col gap-3 py-5 text-xs text-[#CFFFDC]/72 md:flex-row md:items-center md:justify-between">
-        <p>&copy; {year} {displayCompanyName}. All rights reserved.</p>
+        <p>
+          &copy;2026 - vidhisatya.com proprietory of East Delhi Law Office ( a law firm). All Rights Reserved. Design &amp; Developed By{" "}
+          <a
+            href="https://kriscel.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-[#CFFFDC] hover:text-white"
+          >
+            Kriscel Tech Private Limited
+          </a>
+        </p>
         <div className="flex flex-wrap gap-4">
           <Link href="/services" className="hover:text-white">
             Mandates

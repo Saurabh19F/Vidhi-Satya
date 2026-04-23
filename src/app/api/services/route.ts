@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 
 import { fail, ok } from "@/lib/apiResponse";
 import { connectToDatabase } from "@/lib/db";
+import { normalizeServices } from "@/lib/service-normalization";
 import { assertAdmin } from "@/lib/route-admin";
 import { slugify } from "@/lib/slugify";
 import { serviceSchema } from "@/lib/validations";
@@ -14,11 +15,11 @@ export async function GET(request: NextRequest) {
     if (showAll) {
       const admin = await assertAdmin(request);
       if (!admin) return fail("Unauthorized.", 401);
-      const services = await Service.find().sort({ createdAt: -1 });
-      return ok(services);
+      const services = await Service.find().sort({ createdAt: -1 }).lean();
+      return ok(normalizeServices(services));
     }
-    const services = await Service.find({ isPublished: true }).sort({ isFeatured: -1, createdAt: -1 });
-    return ok(services);
+    const services = await Service.find({ isPublished: true }).sort({ isFeatured: -1, createdAt: -1 }).lean();
+    return ok(normalizeServices(services));
   } catch (error) {
     return fail(error instanceof Error ? error.message : "Failed to fetch services.", 500);
   }

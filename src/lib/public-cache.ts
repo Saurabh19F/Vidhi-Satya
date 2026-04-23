@@ -7,6 +7,7 @@ import ContactInfo from "@/models/ContactInfo";
 import FAQ from "@/models/FAQ";
 import Service from "@/models/Service";
 import SiteSetting from "@/models/SiteSetting";
+import { normalizeServices } from "@/lib/service-normalization";
 import { sortServicesByPriority } from "@/lib/service-order";
 import type { AboutItem, BlogItem, ContactInfoItem, ServiceItem, SiteSettingItem } from "@/types";
 
@@ -43,7 +44,7 @@ const getCachedPublicLayoutData = unstable_cache(
     }>({
       contact: contactInfo,
       settings: siteSettings,
-      serviceLinks: sortServicesByPriority(navServices)
+      serviceLinks: sortServicesByPriority(normalizeServices(navServices))
         .filter(isServiceLinkCandidateValid)
         .slice(0, 3)
         .map((service) => ({ title: service.title, slug: service.slug }))
@@ -75,7 +76,7 @@ const getCachedServicesData = unstable_cache(
   async () => {
     await connectToDatabase();
     const services = (await Service.find({ isPublished: true }).lean()) as unknown as ServiceItem[];
-    return serialize<ServiceItem[]>(sortServicesByPriority(services));
+    return serialize<ServiceItem[]>(sortServicesByPriority(normalizeServices(services)));
   },
   ["public-services-data"],
   { revalidate: REVALIDATE_SECONDS, tags: ["public-services"] }

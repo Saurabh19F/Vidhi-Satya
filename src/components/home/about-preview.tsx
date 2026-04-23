@@ -1,10 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { MotionReveal } from "@/components/common/motion-reveal";
+import { SafeImage } from "@/components/common/safe-image";
 import { SectionTitle } from "@/components/common/section-title";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { resolveImageUrl } from "@/lib/image-url";
 
 type AboutPreviewProps = {
   about: {
@@ -16,6 +17,7 @@ type AboutPreviewProps = {
 
 export function AboutPreview({ about }: AboutPreviewProps) {
   if (!about) return null;
+  const aboutImageUrl = resolveImageUrl(about.imageUrl, "/uploads/about-main.jpeg");
 
   return (
     <section className="section-padding">
@@ -30,8 +32,9 @@ export function AboutPreview({ about }: AboutPreviewProps) {
           <Card className="overflow-hidden">
             <CardContent className="p-0">
               <div className="relative h-[260px] sm:h-[320px] md:h-[340px]">
-                <Image
-                  src={about.imageUrl || "/uploads/about-main.jpeg"}
+                <SafeImage
+                  src={aboutImageUrl}
+                  fallbackSrc="/uploads/about-main.jpeg"
                   alt={`${about.heading} - Vidhi Satya advisory overview`}
                   fill
                   sizes="(max-width: 768px) 100vw, 45vw"

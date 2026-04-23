@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
-import { format } from "date-fns";
 
 import { buildPageMetadata } from "@/lib/seo";
 import { getPublicBlogsData } from "@/lib/public-cache";
@@ -8,7 +6,7 @@ import { CTASection } from "@/components/common/cta-section";
 import { StructuredData } from "@/components/common/structured-data";
 import { SectionTitle } from "@/components/common/section-title";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { resolveBlogImage } from "@/lib/blog-image";
 import { buildItemListJsonLd, buildWebPageJsonLd } from "@/lib/structured-data";
 import type { BlogItem } from "@/types";
@@ -53,46 +51,88 @@ export default async function BlogPage({ searchParams }: Props) {
             description="Practical perspectives on governance, strategy, and execution."
             className="max-w-3xl"
           />
-          <Card className="mt-8 w-full">
-            <CardContent className="p-6 sm:p-8 lg:p-10">
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">Team Member</p>
-              <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-start">
-                <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full ring-1 ring-outline-variant/20">
-                  <Image
-                    src="/uploads/rajesh-narang.jpg"
-                    alt="Rajesh Narang, founder and mentor at Vidhi Satya"
-                    fill
-                    sizes="96px"
-                    className="object-cover"
-                  />
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            <Card>
+              <CardContent className="p-6 sm:p-8">
+                <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">Founder</p>
+                <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-start">
+                  <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full ring-1 ring-outline-variant/20">
+                    <Image
+                      src="/uploads/rajesh-narang.jpg"
+                      alt="Rajesh Narang, founder and mentor at Vidhi Satya"
+                      fill
+                      sizes="96px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Rajesh Narang</p>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
+                      Founder and mentor with 35+ years of advisory experience across individual, corporate, and government matters.
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
+                      He has guided decision-makers on governance, compliance, strategic positioning, risk management, and execution
+                      planning for complex mandates. His advisory approach combines practical legal-business judgment, structured
+                      implementation support, and confidential stakeholder alignment for high-impact outcomes.
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
+                      Over the years, he has supported founders, leadership teams, and institutions in setting clear priorities, resolving
+                      operational bottlenecks, and executing time-sensitive decisions with accountability. His work emphasizes actionable
+                      roadmaps, disciplined follow-through, and measurable progress from planning to implementation.
+                    </p>
+                    <a
+                      href="https://www.linkedin.com/in/rajesh-narang-b405bb32/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-block text-sm font-semibold text-accent hover:underline"
+                    >
+                      View LinkedIn Profile
+                    </a>
+                  </div>
                 </div>
-                <div className="min-w-0">
-                  <p className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold sm:text-4xl">Rajesh Narang</p>
-                  <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
-                    Founder and mentor with 35+ years of advisory experience across individual, corporate, and government matters.
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
-                    He has guided decision-makers on governance, compliance, strategic positioning, risk management, and execution planning
-                    for complex mandates. His advisory approach combines practical legal-business judgment, structured implementation support,
-                    and confidential stakeholder alignment for high-impact outcomes.
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
-                    Over the years, he has supported founders, leadership teams, and institutions in setting clear priorities, resolving
-                    operational bottlenecks, and executing time-sensitive decisions with accountability. His work emphasizes actionable
-                    roadmaps, disciplined follow-through, and measurable progress from planning to implementation.
-                  </p>
-                <a
-                  href="https://www.linkedin.com/in/rajesh-narang-b405bb32/"
-                  target="_blank"
-                    rel="noreferrer"
-                    className="mt-4 inline-block text-sm font-semibold text-accent hover:underline"
-                  >
-                    View LinkedIn Profile
-                  </a>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6 sm:p-8">
+                <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground">Co-Founder</p>
+                <div className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-start">
+                  <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full ring-1 ring-outline-variant/20">
+                    <Image
+                      src="/uploads/avika-narang.jpg"
+                      alt="Avika Narang, co-founder at Vidhi Satya"
+                      fill
+                      sizes="96px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-[family-name:var(--font-newsreader)] text-3xl font-semibold">Avika Narang</p>
+                    <p className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base">
+                      Co-founder supporting the strategic direction of Vidhi Satya across research, insight publishing, and audience
+                      communication.
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
+                      She contributes to topic development, editorial planning, and quality review to ensure every insight translates
+                      complex governance and business issues into practical, decision-ready clarity.
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-base">
+                      Her work focuses on consistent knowledge delivery, structured content operations, and strengthening the bridge
+                      between advisory thinking and implementation-focused communication.
+                    </p>
+                    <a
+                      href="https://www.linkedin.com/in/avika-narang-746637240/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 inline-block text-sm font-semibold text-accent hover:underline"
+                    >
+                      View LinkedIn Profile
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
           <div className="mt-10 mb-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             <Card>
               <CardContent className="p-5">
@@ -129,65 +169,6 @@ export default async function BlogPage({ searchParams }: Props) {
                 </p>
               </CardContent>
             </Card>
-          </div>
-
-          {featured ? (
-            <Card className="overflow-hidden">
-              <div className="grid md:grid-cols-2">
-                <div className="relative h-64 sm:h-72 md:h-full">
-                  <Image
-                    src={resolveBlogImage(featured)}
-                    alt={`${featured.title} featured advisory insight`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-6 sm:p-8">
-                  <Badge>Featured</Badge>
-                  <h2 className="mt-4 font-[family-name:var(--font-newsreader)] text-3xl font-semibold sm:text-4xl lg:text-5xl">
-                    {featured.title}
-                  </h2>
-                  <p className="mt-3 text-sm text-muted-foreground">{format(new Date(featured.publishedAt), "PPP")}</p>
-                  <p className="mt-4 text-muted-foreground">{featured.excerpt}</p>
-                  <Link href={`/blog/${featured.slug}`} className="mt-6 inline-block font-semibold text-accent">
-                    Read Full Article
-                  </Link>
-                </CardContent>
-              </div>
-            </Card>
-          ) : null}
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {blogs.slice(1).map((blog) => (
-              <Card key={String(blog._id)} className="overflow-hidden">
-                <div className="relative h-48">
-                  <Image
-                    src={resolveBlogImage(blog)}
-                    alt={`${blog.title} article cover image`}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                    className="object-cover"
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-xl">{blog.title}</CardTitle>
-                  <p className="text-xs text-muted-foreground">{format(new Date(blog.publishedAt), "PPP")}</p>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{blog.excerpt}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {blog.tags.map((t) => (
-                      <Badge key={t} variant="outline">
-                        {t}
-                      </Badge>
-                    ))}
-                  </div>
-                  <Link href={`/blog/${blog.slug}`} className="mt-4 inline-block text-sm font-semibold text-accent">
-                    Continue Reading
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>

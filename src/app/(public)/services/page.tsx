@@ -13,72 +13,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { buildItemListJsonLd, buildWebPageJsonLd } from "@/lib/structured-data";
 import type { ServiceItem } from "@/types";
 
-const serviceTracks = [
-  {
-    category: "Individual Page",
-    price: "Cost 2 Lacs Monthly Onwards",
-    focus: ["Personal", "Social", "Political", "Corporate", "Government"]
-  },
-  {
-    category: "Corporate Page",
-    price: "Cost 5 L Monthly Onwards",
-    focus: ["Social CSR Promotion", "Political", "Competition", "Government", "Managing Personal (Self)"]
-  },
-  {
-    category: "Government Page",
-    price: "Cost 1 CR Quarterly Onwards",
-    focus: ["Individual", "Community", "Projects", "Government", "Deternation"]
-  }
-];
-
-const pricingCards = [
-  {
-    category: "Individual",
-    entries: [
-      {
-        type: "INR",
-        details: "2L per month onwards",
-        notes: "Value add-ons as needed + logistics/protocols"
-      },
-      {
-        type: "INR",
-        details: "2L per month onwards",
-        notes: "Includes logistics/protocols"
-      }
-    ]
-  },
-  {
-    category: "Corporate",
-    entries: [
-      {
-        type: "INR",
-        details: "5L per month onwards",
-        notes: "Plus logistics/protocols"
-      },
-      {
-        type: "INR",
-        details: "5L per month onwards",
-        notes: "Plus logistics/protocols + 2 SPOC"
-      }
-    ]
-  },
-  {
-    category: "Government",
-    entries: [
-      {
-        type: "INR",
-        details: "1 Cr per quarter onwards",
-        notes: "Plus logistics + admin support at each level"
-      },
-      {
-        type: "Levels",
-        details: "IAS, IPS, IRS + other officials",
-        notes: "Operational support included by Government Organization"
-      }
-    ]
-  }
-];
-
 const generalPricingNote = {
   details: "No discounts permissible",
   notes: "Except special agreed cases"
@@ -87,10 +21,8 @@ const generalPricingNote = {
 const operatingModel = [
   ["SPOC", "Appointment of SPOC at both ends"],
   ["Mode of Working", "Meetings to settle course of action"],
-  ["Timeline", "Action within 30 days"],
-  ["Decision Timeline", "Course of action decided up to 30 days/amendment"],
-  ["Work Start", "Work begins within 30 days"],
-  ["Payment Terms", "All payments in advance - No credit"],
+  ["Time", "As settled"],
+  ["Work Start", "Work begins on receipt of advance payment and signed contract"],
   ["Payment Mode", "Bank transfer only (No cash), online preferred"],
   ["Change Management", "Any alteration/decision by SPOC only"],
   ["Communication", "All communication via email (by SPOC)"]
@@ -98,12 +30,11 @@ const operatingModel = [
 
 const confidentialityRules = [
   ["Confidentiality", "Due to privacy of contracts, sharing of personal/organizational data is discouraged."],
-  ["Disclosure", "Only allowed by High Court order (Strict)."],
-  ["Client Rights", "Both parties can exit with 30 days notice."],
-  ["Handover", "Amicable handover within 30 days."],
+  ["Client Rights", "30 day notice/ Handover payment"],
   ["Payment Terms", "All payments to company bank account only."],
   ["Contract Basis", "Work will be executed as per contract only."],
-  ["Additional Note", "Details can be added later as required."]
+  ["Additional Note", "Details can be added later as required."],
+  ["Refund", "Only any refund will be 50% of the advance/fee."]
 ];
 
 export async function generateMetadata() {
@@ -168,62 +99,13 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-surface-low">
-        <div className="container">
-          <SectionTitle
-            eyebrow="Service Menu"
-            title="Category Tracks, Scope, and Baseline Commercial Bands"
-            description="These structured tracks are offered as baseline engagement pathways. Final scope is confirmed during consultation."
-          />
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {serviceTracks.map((track) => (
-              <Card key={track.category}>
-                <CardContent className="p-6">
-                  <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground">{track.category}</p>
-                  <p className="mt-2 font-[family-name:var(--font-newsreader)] text-2xl font-semibold">{track.price}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {track.focus.map((item) => (
-                      <Badge key={item} variant="outline">
-                        {item}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="section-padding">
         <div className="container space-y-8">
           <SectionTitle
             eyebrow="Commercial Notes"
-            title="Pricing Reference, Process Controls, and Compliance Terms"
+            title="Process Controls, and Compliance Terms"
             description="All values below are reference bands from your supplied content and can be finalized based on mandate depth."
           />
-
-          <div className="grid gap-6 lg:grid-cols-3">
-            {pricingCards.map((card) => (
-              <Card key={card.category} className="h-full">
-                <CardContent className="p-6">
-                  <h3 className="font-[family-name:var(--font-newsreader)] text-2xl font-semibold">{card.category}</h3>
-                  <div className="mt-5 space-y-4">
-                    {card.entries.map((entry, idx) => (
-                      <div key={`${card.category}-${idx}`} className="rounded-[0.75rem] bg-surface-low p-4 ring-1 ring-outline-variant/15">
-                        <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">Type</p>
-                        <p className="mt-1 text-sm font-semibold text-foreground">{entry.type}</p>
-                        <p className="mt-3 text-xs uppercase tracking-[0.14em] text-muted-foreground">Details</p>
-                        <p className="mt-1 text-sm text-foreground/90">{entry.details}</p>
-                        <p className="mt-3 text-xs uppercase tracking-[0.14em] text-muted-foreground">Price / Notes</p>
-                        <p className="mt-1 text-sm text-foreground/90">{entry.notes}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
 
           <Card className="border-primary/25 bg-primary/10">
             <CardContent className="p-6">

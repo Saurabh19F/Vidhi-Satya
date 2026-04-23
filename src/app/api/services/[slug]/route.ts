@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 
 import { fail, ok } from "@/lib/apiResponse";
 import { connectToDatabase } from "@/lib/db";
+import { normalizeService } from "@/lib/service-normalization";
 import { assertAdmin } from "@/lib/route-admin";
 import { slugify } from "@/lib/slugify";
 import { serviceSchema } from "@/lib/validations";
@@ -24,7 +25,7 @@ export async function GET(request: NextRequest, context: Context) {
       if (!admin) return fail("Unauthorized.", 401);
     }
 
-    return ok(document);
+    return ok(normalizeService(document.toObject()));
   } catch (error) {
     return fail(error instanceof Error ? error.message : "Failed to fetch service.", 500);
   }

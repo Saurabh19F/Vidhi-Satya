@@ -14,8 +14,8 @@ type CTASectionProps = {
 };
 
 export function CTASection({
-  title = "Ready for a More Certain Strategic Direction?",
-  description = "Partner with Vidhi Satya for focused advisory support aligned to your personal, corporate, or public-sector goals.",
+  title = "If you are ready, for  better management and decision then ?",
+  description = "Partner with Vidhi Satya for focused advisory support aligned to your personal, corporate, or government sector.",
   ctaText = "Book Consultation",
   ctaLink = "/book-consultation"
 }: CTASectionProps) {

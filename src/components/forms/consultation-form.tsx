@@ -18,24 +18,40 @@ function requiresDepartmentAndDesignation(serviceInterested?: string) {
   return value.includes("corporate") || value.includes("government") || value.includes("gov");
 }
 
+function isWeekendDate(value?: string) {
+  if (!value) return false;
+  const date = new Date(`${value}T00:00:00`);
+  const day = date.getDay();
+  return day === 0 || day === 6;
+}
+
 const consultationSchema = enquirySchema.extend({
   preferredDate: z.string().optional()
 }).superRefine((values, ctx) => {
-  if (!requiresDepartmentAndDesignation(values.serviceInterested)) return;
+  const needsDepartmentAndDesignation = requiresDepartmentAndDesignation(values.serviceInterested);
+  if (needsDepartmentAndDesignation) {
+    if (!values.department?.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Department is required for corporate/government consultations.",
+        path: ["department"]
+      });
+    }
 
-  if (!values.department?.trim()) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      message: "Department is required for corporate/government consultations.",
-      path: ["department"]
-    });
+    if (!values.designation?.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Designation is required for corporate/government consultations.",
+        path: ["designation"]
+      });
+    }
   }
 
-  if (!values.designation?.trim()) {
+  if (isWeekendDate(values.preferredDate)) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
-      message: "Designation is required for corporate/government consultations.",
-      path: ["designation"]
+      message: "Please select a weekday (Monday to Friday).",
+      path: ["preferredDate"]
     });
   }
 });
@@ -53,6 +69,8 @@ export function ConsultationForm({ serviceOptions }: ConsultationFormProps) {
     handleSubmit,
     watch,
     setValue,
+    setError,
+    clearErrors,
     reset,
     formState: { errors }
   } = useForm<ConsultationValues>({
@@ -64,6 +82,7 @@ export function ConsultationForm({ serviceOptions }: ConsultationFormProps) {
     }
   });
   const selectedService = watch("serviceInterested");
+  const preferredDateField = register("preferredDate");
   const showDepartmentAndDesignation = requiresDepartmentAndDesignation(selectedService);
 
   const onSubmit = async (values: ConsultationValues) => {
@@ -110,7 +129,25 @@ export function ConsultationForm({ serviceOptions }: ConsultationFormProps) {
         </div>
         <div>
           <Label>Preferred Date</Label>
-          <Input type="date" {...register("preferredDate")} />
+          <Input
+            type="date"
+            {...preferredDateField}
+            onChange={(event) => {
+              preferredDateField.onChange(event);
+              const value = event.target.value;
+              if (isWeekendDate(value)) {
+                setValue("preferredDate", "", { shouldValidate: true, shouldDirty: true });
+                setError("preferredDate", {
+                  type: "manual",
+                  message: "Please select a weekday (Monday to Friday)."
+                });
+                toast.error("Saturday and Sunday are unavailable. Please select a weekday.");
+                return;
+              }
+              clearErrors("preferredDate");
+            }}
+          />
+          {errors.preferredDate ? <p className="mt-1 text-xs text-red-600">{errors.preferredDate.message}</p> : null}
         </div>
       </div>
       <div>

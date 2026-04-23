@@ -28,7 +28,6 @@ export default async function PublicLayout({ children }: { children: ReactNode }
           footerText={settings?.footerText}
           address={contact?.address}
           phone={contact?.phone}
-          email={contact?.email}
         />
         <StickyCta text={settings?.ctaText || "Book Consultation"} />
         <WhatsappFloat phone={contact?.whatsapp || contact?.phone} />

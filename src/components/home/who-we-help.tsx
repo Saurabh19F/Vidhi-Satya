@@ -17,7 +17,7 @@ const groups = [
   },
   {
     title: "Government Bodies",
-    text: "Policy-aligned advisory frameworks for institutional initiatives.",
+    text: "Policy-aligned project based advisory for any initiatives at State and Central Government levels.",
     icon: Landmark
   }
 ];
