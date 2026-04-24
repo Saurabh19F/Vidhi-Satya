@@ -95,17 +95,20 @@ export function Footer({
       </div>
 
       <div className="container flex flex-col gap-3 py-5 text-xs text-[#CFFFDC]/72 md:flex-row md:items-center md:justify-between">
-        <p>
-          &copy;2026 - vidhisatya.com proprietory of East Delhi Law Office ( a law firm). All Rights Reserved. Design &amp; Developed By{" "}
-          <a
-            href="https://kriscel.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-[#CFFFDC] hover:text-white"
-          >
-            Kriscel Tech Private Limited
-          </a>
-        </p>
+        <div className="space-y-1">
+          <p>
+            &copy;2026 - vidhisatya.com proprietory of East Delhi Law Office ( a law firm). All Rights Reserved. Design &amp; Developed By{" "}
+            <a
+              href="https://kriscel.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#CFFFDC] hover:text-white"
+            >
+              Kriscel Tech Private Limited
+            </a>
+          </p>
+          <p className="text-[11px] text-[#CFFFDC]/60">All images displayed on this website are AI-generated.</p>
+        </div>
         <div className="flex flex-wrap gap-4">
           <Link href="/services" className="hover:text-white">
             Mandates
