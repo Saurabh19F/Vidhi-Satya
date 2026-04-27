@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 33% 95%;
+    --foreground: 138 24% 19%;
+    --card: 136 52% 97%;
+    --card-foreground: 138 24% 19%;
+    --popover: 136 52% 97%;
+    --popover-foreground: 138 24% 19%;
+    --primary: 137 37% 57%;
+    --primary-container: 135 41% 31%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 136 100% 91%;
+    --secondary-container: 137 37% 57%;
+    --secondary-foreground: 138 24% 19%;
+    --tertiary: 138 24% 19%;
+    --tertiary-container: 135 41% 31%;
+    --muted: 136 35% 90%;
+    --muted-foreground: 135 41% 31%;
+    --accent: 135 41% 31%;
+    --accent-foreground: 136 100% 91%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 136 24% 78%;
+    --input: 136 24% 78%;
+    --ring: 137 37% 57%;
+    --outline-variant: 135 41% 31%;
+    --surface-container-lowest: 136 60% 99%;
+    --surface-container-low: 136 54% 97%;
+    --surface-container: 136 46% 95%;
+    --surface-container-high: 136 40% 92%;
+    --surface-container-highest: 136 34% 88%;
+    --surface-variant: 136 31% 84%;
+    --surface-bright: 0 0% 100%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at 8% 5%, rgba(104, 186, 127, 0.2), transparent 40%),
+      radial-gradient(circle at 92% 18%, rgba(207, 255, 220, 0.85), transparent 46%),
+      radial-gradient(circle at 58% 84%, rgba(46, 111, 64, 0.1), transparent 44%),
+      radial-gradient(circle at 80% 72%, rgba(37, 61, 44, 0.08), transparent 40%),
+      linear-gradient(170deg, rgba(250, 251, 246, 1) 0%, rgba(244, 249, 242, 1) 52%, rgba(240, 247, 238, 1) 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(104, 186, 127, 0.35);
+    color: #253d2c;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-newsreader);
+    letter-spacing: -0.02em;
+    color: hsl(var(--foreground));
+  }
+
+  p,
+  li,
+  label,
+  input,
+  textarea,
+  button {
+    font-family: var(--font-manrope);
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-14 md:py-20 lg:py-24;
+  }
+
+  .surface-low {
+    background-color: hsl(var(--surface-container-low));
+  }
+
+  .surface-panel {
+    background-color: hsl(var(--surface-container));
+  }
+
+  .surface-interactive {
+    background-color: hsl(var(--surface-container-high));
+  }
+
+  .glass-panel {
+    background-color: color-mix(in oklab, hsl(var(--surface-bright)) 60%, transparent);
+    backdrop-filter: blur(20px);
+  }
+
+  .ghost-outline {
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, hsl(var(--outline-variant)) 15%, transparent);
+  }
+
+  .ambient-float {
+    box-shadow:
+      0 8px 22px rgba(22, 36, 26, 0.18),
+      0 0 15px rgba(104, 186, 127, 0.18);
+  }
+
+  .editorial-display {
+    font-family: var(--font-newsreader);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .india-tricolor-button {
+    color: #173064 !important;
+    background-image: linear-gradient(180deg, #ff9933 0%, #ff9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%, #138808 100%) !important;
+    background-color: transparent !important;
+    box-shadow:
+      0 8px 22px rgba(19, 136, 8, 0.24),
+      0 0 14px rgba(255, 153, 51, 0.24);
+  }
+
+  .india-tricolor-button:hover {
+    filter: saturate(1.08) brightness(1.02);
+  }
+
+  .india-tricolor-fab {
+    color: #173064;
+    background-image: linear-gradient(180deg, #ff9933 0%, #ff9933 33.33%, #ffffff 33.33%, #ffffff 66.66%, #138808 66.66%, #138808 100%);
+    box-shadow:
+      0 10px 22px rgba(19, 136, 8, 0.28),
+      0 0 16px rgba(255, 153, 51, 0.24);
+  }
+
+  .india-tricolor-fab:hover {
+    filter: saturate(1.08) brightness(1.03);
+  }
+}
