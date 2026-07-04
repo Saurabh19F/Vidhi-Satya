@@ -97,7 +97,7 @@ export function Footer({
       <div className="container flex flex-col gap-3 py-5 text-xs text-[#CFFFDC]/72 md:flex-row md:items-center md:justify-between">
         <div className="space-y-1">
           <p>
-            &copy;2026 - vidhisatya.com proprietory of East Delhi Law Office ( a law firm). All Rights Reserved. Design &amp; Developed By{" "}
+            &copy;2026 - All rights of vidhisatya.com reserved with Sh.Rajesh Narang. Design &amp; Developed By{" "}
             <a
               href="https://kriscel.com/"
               target="_blank"
